@@ -1,0 +1,26 @@
+{
+  "name": "choreboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server/index.js",
+  "scripts": {
+    "start": "node server/index.js",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd../client && npm i",
+    "seed": "cd server && npm run seed"
+
+  },
+  "devDependencies": {
+    "concurrently": "^7.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rdoolz51/Choreboard.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rdoolz51/Choreboard/issues"
+  },
+  "homepage": "https://github.com/Rdoolz51/Choreboard#readme"
+}

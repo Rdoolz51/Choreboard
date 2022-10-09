@@ -1,0 +1,29 @@
+{
+  "name": "choreboard",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rdoolz51/Choreboard.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rdoolz51/Choreboard/issues"
+  },
+  "homepage": "https://github.com/Rdoolz51/Choreboard#readme",
+  "dependencies": {
+    "apollo-server-express": "^3.10.3",
+    "bcrypt": "^5.1.0",
+    "express": "^4.18.2",
+    "faker": "^6.6.6",
+    "graphql": "^16.6.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^6.6.5"
+  }
+}
