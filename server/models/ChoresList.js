@@ -6,7 +6,7 @@ const choresListSchema = new Schema(
             type: Date,
             required: true
         },
-        childId: {
+        userId: {
             type: Schema.Types.ObjectId,
             ref: "User"
         },

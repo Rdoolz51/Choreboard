@@ -5,7 +5,7 @@ const choreSchema = new Schema(
         description: {
             type: String,
         },
-        childId: {
+        userId: {
             types: Schema.Types.ObjectId,
             ref: 'User'
         },
