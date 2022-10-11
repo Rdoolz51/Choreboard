@@ -15,6 +15,9 @@ const db = require('./config/connection');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(express.urlencoded({extended: false}));
+app.use(express.json());
+
 db.once('open', () => {
     app.listen(PORT, () => {
         console.log(`API running on port ${PORT}`);
