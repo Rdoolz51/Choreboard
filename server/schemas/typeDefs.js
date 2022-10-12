@@ -2,55 +2,55 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
     type User {
-        _id: ID!
-        username: STRING!
-        email: STRING!
-        password: STRING!
+        _id: ID
+        username: String
+        email: String
+        password: String
         children: [Child]
     }
     
     type Child {
-        _id: ID!
-        name: STRING!
-        points: INT!
+        _id: ID
+        name: String
+        points: Int
     }
 
     type Chore {
-        _id: ID!
-        name: STRING!
-        description: STRING
-        pointValue: INT!
+        _id: ID
+        name: String
+        description: String
+        pointValue: Int
         completedBy: Child
     }
 
     type Reward {
-        _id: ID!
-        name: STRING!
-        description: STRING
-        cost: INT!
+        _id: ID
+        name: String
+        description: String
+        cost: Int
     }
     
     type Auth {
-        token: ID!
+        token: ID
         user: User
       }
 
     type Query {
-        user(username: STRING): User
-        chores(name: STRING): [Chore]
-        rewards(name: STRING): [Reward]
+        user(username: String): User
+        chores(name: String): [Chore]
+        rewards(name: String): [Reward]
     }
 
     type Mutation {
-        register(email: STRING!, password: STRING!): User
-        login(email: STRING!, password: STRING!): Auth
-        editUser(password: STRING!): User
-        addChore(name: STRING!, description: STRING, pointValue: INT!, completedBy: Child): Chore
-        editChore(_id: ID!, completedBy: Child!): Chore
+        register(email: String!, password: String!): User
+        login(email: String!, password: String!): Auth
+        editUser(password: String): User
+        addChore(name: String!, description: String, pointValue: Int!): Chore
+        editChore(_id: ID!): Chore
         removeChore(_id: ID!): Chore
-        addReward(name: STRING!, description: STRING, cost: INT!) : Reward
+        addReward(name: String!, description: String, cost: Int!) : Reward
         removeReward(_id: ID!): Reward
     }
-`;
-
-module.exports = typeDefs;
+    `;
+    
+    module.exports = typeDefs;

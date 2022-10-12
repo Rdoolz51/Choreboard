@@ -14,7 +14,11 @@ const choreSchema = new Schema(
             type: Number, 
             required: true
         },
-        completedBy: [childSchema]
+        completedBy: {
+            type: Boolean,
+            default: false,
+            ref: "Child"
+        }
     }
 );
 
