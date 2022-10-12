@@ -4,7 +4,7 @@ const { User, Child, Chores, RewardDes } = require('../models');
 const resolvers = {
     Query: {
         user: async () => {
-            return user.findOne({ username });
+            return User.findOne({ username });
 
         }
     }
