@@ -1,8 +1,6 @@
 const User = require('./User');
-const Child = require('./Children');
-const Chores = require('./Chores');
-const ChoresList = require('./ChoresList');
-const Rewards = require('./Rewards');
-const RewardDes = require('./RewardDes');
+const Child = require('./Child');
+const Chore = require('./Chore');
+const Reward = require('./Reward');
 
-module.exports = { User, Child, ChoresList, Chores, Rewards, RewardDes };
+module.exports = { User, Child,  Chore, Reward};
