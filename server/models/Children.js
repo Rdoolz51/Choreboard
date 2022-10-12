@@ -3,15 +3,15 @@ const { Schema, model } = require('mongoose');
 const childSchema = new Schema(
     {
         name: {
-            type: String, 
+            type: String,
             required: true
         },
-        childId: {
+        childId: {  //TODO: ASK MICHAEL (ParentID or kidID or UserID)
             type: Schema.Types.ObjectId,
             ref: 'User'
         },
         isDeleted: {
-            type: Boolean, 
+            type: Boolean,
             default: false
         }
     }

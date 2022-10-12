@@ -1,4 +1,4 @@
-const { Schema, model } =require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const choresListSchema = new Schema(
     {
@@ -12,7 +12,7 @@ const choresListSchema = new Schema(
         },
         completedBy: {
             type: Schema.Types.ObjectId,
-            ref: 'Children'
+            ref: 'Child'
         },
         Chores: [{
             Chores: {
@@ -25,14 +25,14 @@ const choresListSchema = new Schema(
             }
         }],
         completionStatus: {
-            type: Boolean, 
+            type: Boolean,
             default: false
         },
         reward: {
             type: Schema.Types.ObjectId,
             ref: "Rewards"
         },
-        idDeleted: {
+        isDeleted: {
             type: Boolean,
             deault: false
         }
@@ -41,4 +41,4 @@ const choresListSchema = new Schema(
 
 const ChoresList = model('ChoresList', choresListSchema);
 
-module.export= ChoresList;
+module.export = ChoresList;
