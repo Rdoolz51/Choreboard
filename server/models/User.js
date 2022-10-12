@@ -23,7 +23,7 @@ const userSchema = new Schema(
         children: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Children'
+                ref: 'Child'
             }
         ],
     }, 

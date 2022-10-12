@@ -36,13 +36,14 @@ const typeDefs = gql`
       }
 
     type Query {
+        users: [User]
         user(username: String): User
-        chores(name: String): [Chore]
-        rewards(name: String): [Reward]
+        chore(name: String): [Chore]
+        reward(name: String): [Reward]
     }
 
     type Mutation {
-        register(email: String!, password: String!): User
+        addUser(email: String!, password: String!): User
         login(email: String!, password: String!): Auth
         editUser(password: String): User
         addChore(name: String!, description: String, pointValue: Int!): Chore

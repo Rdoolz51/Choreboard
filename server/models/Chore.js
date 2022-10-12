@@ -15,8 +15,7 @@ const choreSchema = new Schema(
             required: true
         },
         completedBy: {
-            type: Boolean,
-            default: false,
+            type: Schema.Types.ObjectId,
             ref: "Child"
         }
     }
