@@ -8,6 +8,7 @@ const resolvers = {
     users: async () => {
       return User.find().select("-__v -password").populate("Child");
     },
+
     //Query to get a single user by username
     user: async (parent, { username }) => {
       return User.findOne({ username })
@@ -15,11 +16,12 @@ const resolvers = {
         .populate("Child");
     },
 
-    //TODO:⬇️ double check these queries 
-    chore: async (parent, {name}) => {
-        const params = name ? {name} : {};
-        return await Chore.find(params).populate("Child");
+    //find all chores
+    chore: async () => {
+        return await Chore.find();
     },
+
+    //find all rewards 
     reward: async () => {
         return await Reward.find();
     }
@@ -52,17 +54,16 @@ const resolvers = {
       }
       const token = signToken(user);
       return { token, user };
-
-      //TODO:⬇️ addChore
-
-      //TODO:⬇️ editChore
-
-      //TODO:⬇️ removeChore
-
-      //TODO:⬇️ addReward
-
-      //TODO:⬇️ removeReward
     },
+    //TODO:⬇️ addChore
+    
+    //TODO:⬇️ editChore
+
+    //TODO:⬇️ removeChore
+
+    //TODO:⬇️ addReward
+
+    //TODO:⬇️ removeReward
   },
 };
 
