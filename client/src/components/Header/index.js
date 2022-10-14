@@ -3,14 +3,19 @@ import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
 
 const Header = () => {
+
+    // const logout = event => {
+    //     event.preventDefault();
+    //     Auth.logout();
+    // }
     return (
         <header>
             <div>
-                <Link to="/">
                     <h1> Chore Board </h1>
-                </Link>
+                {/* <Link to="/">
+                </Link> */}
                 <nav>
-                    {Auth.loggedIn() ? (
+                    {/* {Auth.loggedIn() ? (
                         <>
                         <Link to="/profile">My page</Link>
                         <a href="/" onClick={logout}>Logout</a>
@@ -20,7 +25,7 @@ const Header = () => {
                         <Link to="/login">Login!</Link>
                         <Link to="signup">Sign up!</Link>
                         </>
-                    )}
+                    )} */}
                 </nav>
             </div>
         </header>
