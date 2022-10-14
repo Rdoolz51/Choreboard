@@ -6,6 +6,7 @@ const typeDefs = gql`
         username: String
         email: String
         password: String
+        childCount: Int
         children: [Child]
     }
     
@@ -51,7 +52,8 @@ const typeDefs = gql`
         removeChore(_id: ID!): Chore
         addReward(name: String!, description: String, cost: Int!) : Reward
         removeReward(_id: ID!): Reward
+        addChild(name: String!, points: Int): Child
     }
     `;
-    
-    module.exports = typeDefs;
+
+module.exports = typeDefs;

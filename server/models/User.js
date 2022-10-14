@@ -1,23 +1,23 @@
 const { Schema, model } = require('mongoose');
-const bcrypt = require ('bcrypt');
+const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
     {
         username: {
-            type: String, 
+            type: String,
             required: true,
-            unique: true, 
+            unique: true,
             trim: true
         },
         email: {
-            type: String, 
-            required: true, 
-            unique: true, 
+            type: String,
+            required: true,
+            unique: true,
             match: [/.+@.+\..+/, 'Must match an email address!']
         },
         password: {
-            type: String, 
-            required: true, 
+            type: String,
+            required: true,
             minLength: 5
         },
         children: [
@@ -26,7 +26,7 @@ const userSchema = new Schema(
                 ref: 'Child'
             }
         ],
-    }, 
+    },
     {
         toJSON: {
             virtuals: true
@@ -34,11 +34,24 @@ const userSchema = new Schema(
     }
 );
 
+userSchema.pre('save', async function (next) {
+    if (this.isNew || this.isModified('password')) {
+        const saltRounds = 10;
+        this.password = await bcrypt.hash(this.password, saltRounds);
+    }
+
+    next();
+});
+
 //compare the incoming password with the hashed password
-userSchema.methods.isCorrectPassword = async function(password) {
-    return bcrypt.compare(password, this.password);
+userSchema.methods.isCorrectPassword = async function (password) {
+    return await bcrypt.compare(password, this.password);
 };
+
+userSchema.virtual('childCount').get(function () {
+    return this.children.length;
+});
 
 const User = model('User', userSchema);
 
-module.exports= User; 
+module.exports = User; 
