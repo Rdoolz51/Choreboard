@@ -1,5 +1,5 @@
 const { AuthenticationError } = require("apollo-server-express");
-const { User, Child, Chore, Reward } = require("../models");
+const { User, Chore, Reward } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const resolvers = {
@@ -55,15 +55,40 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    //TODO:⬇️ addChore
-    
-    //TODO:⬇️ editChore
+    //addChore
+    addChore: async (parent, args, context) => {
+      if(context.user){
+        const chore = await Chore.create({
+          ...args,
+          username: context.user.username,
+        });
+        
+        //removeChore
+        await User.findByIdAndDelete(
+            {_id: context.user._id},
+            { $pull: { chore: chore._id}},
+            {new: false}
+          )
+        return chore;
+      }
+    },
+    //addReward
+    addReward: async (parent, args, context) => {
+      if(context.user){
+        const reward = await Reward.create({
+          ...args,
+          username: context.user.username,
+        });
 
-    //TODO:⬇️ removeChore
-
-    //TODO:⬇️ addReward
-
-    //TODO:⬇️ removeReward
+        //removeReward
+        await User.findByIdAndDelete(
+          { _id: context.user._id},
+          { $pull: { reward: reward._id}},
+          { new: false}
+        )
+        return reward;
+      }
+    }
   },
 };
 
