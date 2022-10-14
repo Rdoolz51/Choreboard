@@ -38,7 +38,6 @@ const typeDefs = gql`
 
     type Query {
         users: [User]
-        children: [Child]
         user(username: String!): User
         chore: [Chore]
         reward: [Reward]

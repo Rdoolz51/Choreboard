@@ -10,10 +10,6 @@ const resolvers = {
       //.select("-__v -password");
     },
 
-    children: async () => {
-      return Child.find();
-    },
-
     //Query to get a single user by username
     user: async (parent, { username }) => {
       return User.findOne({ username })
