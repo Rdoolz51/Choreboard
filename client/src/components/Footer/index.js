@@ -3,8 +3,8 @@ import React from 'react';
 const Footer = () => {
     return (
         <footer>
-            <div>
-                &copy; 2022 King Daddy Donkey Dong
+            <div className="footer">
+                &copy; 2022 Chore Board
             </div>
         </footer>
     )
