@@ -36,7 +36,19 @@ export const ADD_CHORE = gql`
 `;
 
 export const EDIT_CHORE = gql`
-    
+    mutation EditChore($id: ID!, $completedBy: ID!) {
+        editChore(_id: $id, completedBy: $completedBy) {
+            _id
+            name
+            description
+            pointValue
+            completedBy {
+                _id
+                name
+                points
+            }
+        }
+    }
 `;
 
 

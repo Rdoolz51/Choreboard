@@ -140,7 +140,7 @@ const resolvers = {
     //   }
     // },
     //addReward - load user, check if the reward id belongs to user(like chore), check if child is user's(like chore), load child, load reward, updateChild(deduct points)
-    //WHEN I MAKE A DATABASE CALL, AWAIT IT.
+    //WHEN I MAKE A DATABASE CALL, AWAIT IT. 
     addReward: async (parent, args, context) => {
       if (context.user) {
         const reward = await Reward.create({
