@@ -44,6 +44,8 @@ export const ADD_CHILD = gql`
     mutation AddChild($name: String!, $points: Int) {
         addChild(name: $name, points: $points) {
             _id
+            name
+            points
         }
     }
 `;

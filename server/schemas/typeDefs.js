@@ -51,7 +51,7 @@ const typeDefs = gql`
         addChore(name: String!, description: String, pointValue: Int!): Chore
         editChore(_id: ID!, completedBy: ID!): Chore
         removeChore(_id: ID!): Chore
-        addReward(name: String!, description: String, cost: Int!) : Reward
+        addReward(name: String!, description: String, cost: Int!) : Reward 
         removeReward(_id: ID!): Reward
         addChild(name: String!, points: Int): Child
     }
