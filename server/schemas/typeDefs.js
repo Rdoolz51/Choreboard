@@ -43,7 +43,9 @@ const typeDefs = gql`
         users: [User]
         me: User
         chore: [Chore]
+        myChores: User
         reward: [Reward]
+        myRewards: User
     }
 
     type Mutation {

@@ -6,22 +6,22 @@ const resolvers = {
   Query: {
     //Query to get all users
     users: async () => {
-      const display = await User.find().populate("children").populate('choreList').populate('rewardList')
+      const user = await User.find().populate("children").populate('choreList').populate('rewardList')
         .select("-__v -password");
 
-      await Promise.all(display.map(async (user) => {
+      await Promise.all(user.map(async (user) => {
         await Promise.all(user.choreList.map(async (chore) => {
           await chore.populate('completedBy');
         }));
       }));
 
-      await Promise.all(display.map(async (user) => {
+      await Promise.all(user.map(async (user) => {
         await Promise.all(user.rewardList.map(async (reward) => {
           await reward.populate('claimedBy');
         }));
       }));
 
-      return display;
+      return user;
     },
 
     //Query to get a single user by username
@@ -51,11 +51,39 @@ const resolvers = {
     chore: async () => {
       return await Chore.find();
     },
+    //find all chores by logged in user
+    myChores: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById({ _id: context.user._id }).populate('choreList').populate('children');
+        console.log(user);
+        await Promise.all(user.choreList.map(async (chore) => {
+          await chore.populate('completedBy');
+        }));
+        return user;
+
+      } else {
+        throw new AuthenticationError("Not Logged In");
+      }
+    },
 
     //find all rewards 
     reward: async () => {
       return await Reward.find();
-    }
+    },
+
+    myRewards: async (parent, args, context) => {
+      if (context.user) {
+        const user = await User.findById({ _id: context.user._id }).populate('rewardList').populate('children');
+        console.log(user);
+        await Promise.all(user.rewardList.map(async (reward) => {
+          await reward.populate('claimedBy');
+        }));
+        return user;
+
+      } else {
+        throw new AuthenticationError("Not Logged In");
+      }
+    },
   },
   Mutation: {
     addUser: async (parent, args) => {
@@ -122,18 +150,20 @@ const resolvers = {
     },
     editChore: async (parent, { _id, completedBy }, context) => {
       if (context.user) {
-        const user = await User.findOne({ _id: context.user._id });
+        const user = await User.findOne({ _id: context.user._id }).populate('choreList');
         for (let i = 0; i < user.choreList.length; i++) {
-          if (_id === user.choreList[i].toString()) {
+          if (_id === user.choreList[i]._id.toString()) {
             const chore = await Chore.findByIdAndUpdate(
               { _id: _id },
               { completedBy },
               { new: true }
             );
+            await Child.findByIdAndUpdate({ _id: completedBy }, { $inc: { 'points': user.choreList[i].pointValue } });
+
+
             return chore;
           }
         }
-
       } else {
         throw new AuthenticationError("Not Logged In");
       }
@@ -152,8 +182,6 @@ const resolvers = {
         throw new AuthenticationError("Not Logged In");
       }
     },
-    //addReward - load user, check if the reward id belongs to user(like chore), check if child is user's(like chore), load child, load reward, updateChild(deduct points)
-    //WHEN I MAKE A DATABASE CALL, AWAIT IT. 
     addReward: async (parent, args, context) => {
       if (context.user) {
         const reward = await Reward.create({ ...args });
@@ -171,14 +199,15 @@ const resolvers = {
 
     claimReward: async (parent, { _id, claimedBy }, context) => {
       if (context.user) {
-        const user = await User.findOne({ _id: context.user._id });
+        const user = await User.findOne({ _id: context.user._id }).populate('rewardList');
         for (let i = 0; i < user.rewardList.length; i++) {
-          if (_id === user.rewardList[i].toString()) {
+          if (_id === user.rewardList[i]._id.toString()) {
             const reward = await Reward.findByIdAndUpdate(
               { _id: _id },
               { claimedBy },
               { new: true }
             );
+            await Child.findByIdAndUpdate({ _id: claimedBy }, { $inc: { 'points': (user.rewardList[i].cost * -1) } });
             return reward;
           }
         }
