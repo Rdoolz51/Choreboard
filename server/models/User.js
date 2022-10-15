@@ -26,6 +26,18 @@ const userSchema = new Schema(
                 ref: 'Child'
             }
         ],
+        choreList: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Chore'
+            }
+        ],
+        rewardList: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Reward'
+            }
+        ]
     },
     {
         toJSON: {

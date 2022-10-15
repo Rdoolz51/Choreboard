@@ -8,6 +8,7 @@ const typeDefs = gql`
         password: String
         childCount: Int
         children: [Child]
+        choreList: [Chore]
     }
     
     type Child {
@@ -38,15 +39,15 @@ const typeDefs = gql`
 
     type Query {
         users: [User]
-        user(username: String!): User
+        me: User
         chore: [Chore]
         reward: [Reward]
     }
 
     type Mutation {
-        addUser(username: String!, email: String!, password: String!): User
+        addUser(username: String!, email: String!, password: String!): Auth
         login(email: String!, password: String!): Auth
-        editUser(password: String): User
+        changePassword(currentPassword: String!, password: String!): Auth
         addChore(name: String!, description: String, pointValue: Int!): Chore
         editChore(_id: ID!, completedBy: ID!): Chore
         removeChore(_id: ID!): Chore

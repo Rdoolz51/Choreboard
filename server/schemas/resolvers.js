@@ -6,15 +6,36 @@ const resolvers = {
   Query: {
     //Query to get all users
     users: async () => {
-      return User.find().populate("children");
-      //.select("-__v -password");
+      const display = await User.find().populate("children").populate('choreList')
+        .select("-__v -password");
+
+      await Promise.all(display.map(async (user) => {
+        await Promise.all(user.choreList.map(async (chore) => {
+          await chore.populate('completedBy');
+        }));
+      }));
+
+      return display;
     },
 
     //Query to get a single user by username
-    user: async (parent, { username }) => {
-      return User.findOne({ username })
-        .select("-__v -password")
-        .populate("children");
+    me: async (parent, args, context) => {
+      if (context.user) {
+
+        const user = await User.findOne({ _id: context.user._id })
+          .select("-__v -password")
+          .populate("children").populate('choreList');
+        console.log(user);
+
+        await Promise.all(user.choreList.map(async (chore) => {
+          await chore.populate('completedBy');
+        }));
+
+        return user;
+      } else {
+        throw new AuthenticationError("Not Logged In");
+      }
+
     },
 
     //find all chores
@@ -34,11 +55,21 @@ const resolvers = {
       return { token, user };
     },
 
-    editUser: async (parent, args, context) => {
+    changePassword: async (parent, args, context) => {
       if (context.user) {
-        return await User.findByIdAndUpdate(context.user._id, args, {
-          new: true,
-        });
+        const user = await User.findOne({ _id: context.user._id });
+        const correctCurrPw = await user.isCorrectPassword(args.currentPassword);
+
+        if (correctCurrPw) {
+
+          user.password = args.password;
+          await user.save();
+          const token = signToken(user);
+          return { token };
+        }
+        else {
+          throw new AuthenticationError("Incorrect Password");
+        }
       }
       throw new AuthenticationError("Not logged in");
     },
@@ -59,25 +90,56 @@ const resolvers = {
     //addChore
     addChore: async (parent, args, context) => {
       if (context.user) {
-        const chore = await Chore.create({
-          ...args,
-          username: context.user.username,
-        });
-        await User.findByIdAndUpdate(
+        const chore = await Chore.create({ ...args });
+        const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
-          { $addToSet: { chore: chore._id } },
+          { $addToSet: { choreList: chore._id } },
           { new: true }
-        );
-        //removeChore
-        await User.findByIdAndDelete(
-          { _id: context.user._id },
-          { $pull: { chore: chore._id } },
-          { new: false }
-        );
-        return chore;
+        ).populate('choreList');
+
+
+        await Promise.all(updatedUser.choreList.map(async (chore) => {
+          await chore.populate('completedBy');
+        }));
+
+        return updatedUser;
+
+
+      }
+      else {
+        throw new AuthenticationError("Not Logged In");
       }
     },
-    //addReward
+    // edit
+    editChore: async (parent, { _id, completedBy }, context) => {
+      if (context.user) {
+        const user = await User.findOne({ _id: context.user._id });
+        console.log(_id);
+        for (let i = 0; i < user.choreList.length; i++) {
+          if (_id === user.choreList[i].toString()) {
+            const chore = await Chore.findByIdAndUpdate(
+              { _id: _id },
+              { completedBy },
+              { new: true }
+            );
+          }
+
+        }
+
+      } else {
+        throw new AuthenticationError("Not Logged In");
+      }
+    },
+    //     removeChore
+    //     await User.findByIdAndDelete(
+    //       { _id: context.user._id },
+    //       { $pull: { chore: chore._id } },
+    //       { new: false }
+    //     );
+    //     return chore;
+    //   }
+    // },
+    //addReward - load user, check if the reward id belongs to user(like chore), check if child is user's(like chore), load child, load reward, updateChild(deduct points)
     addReward: async (parent, args, context) => {
       if (context.user) {
         const reward = await Reward.create({
@@ -98,12 +160,12 @@ const resolvers = {
     addChild: async (parent, args, context) => {
       if (context.user) {
         const child = await Child.create({ ...args });
-        const updatedChild = await User.findOneAndUpdate(
+        const updatedUser = await User.findByIdAndUpdate(
           { _id: context.user._id },
           { $addToSet: { children: child._id } },
           { new: true }
         ).populate("children");
-        return updatedChild;
+        return child;
       }
     }
   },
