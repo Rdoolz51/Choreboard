@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 
 const rewardSchema = new Schema(
-    {   
+    {
         name: {
             type: String,
             required: true
@@ -12,6 +12,10 @@ const rewardSchema = new Schema(
         cost: {
             type: Number,
             required: true
+        },
+        claimedBy: {
+            type: Schema.Types.ObjectId,
+            ref: "Child"
         }
     }
 );

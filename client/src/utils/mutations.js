@@ -24,12 +24,18 @@ export const CHANGE_PASSWORD = gql`
     }
 `;
 
+export const REMOVE_USER = gql`
+mutation RemoveUser($id: ID!) {
+    removeUser(_id: $id) {
+      _id
+    }
+  }
+`;
+
 export const ADD_CHORE = gql`
     mutation AddChore($name: String!, $description: String, $pointValue: Int!) {
         addChore(name: $name, description: $description, pointValue: $pointValue) {
-            name
-            description
-            pointValue
+            _id
         }
     }
   
@@ -44,8 +50,32 @@ export const EDIT_CHORE = gql`
             pointValue
             completedBy {
                 _id
-                name
-                points
+            }
+        }
+    } 
+`;
+
+export const REMOVE_CHORE = gql`
+    mutation RemoveChore($id: ID!) {
+        removeChore(_id: $id) {
+        _id
+        }
+    }
+`;
+
+export const ADD_REWARD = gql`
+    mutation AddReward($name: String!, $description: String, $cost: Int!) {
+        addReward(name: $name, description: $description, cost: $cost) {
+            _id
+        }
+    }
+`;
+
+export const CLAIM_REWARD = gql`
+    mutation EditReward($id: ID!, $claimedBy: ID!) {
+        editReward(_id: $id, claimedBy: $claimedBy) {
+            claimedBy {
+                _id
             }
         }
     }
@@ -58,6 +88,14 @@ export const ADD_CHILD = gql`
             _id
             name
             points
+        }
+    }
+`;
+
+export const REMOVE_CHILD = gql`
+    mutation RemoveChild($id: ID!) {
+        removeChild(_id: $id) {
+            _id
         }
     }
 `;
