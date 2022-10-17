@@ -31,6 +31,7 @@ body {
 /* Footer Styling */
 .footer{
   /* background-color: var(--teal); */
+  padding-top: 50%;
 }
 .footer-title{
   font-family: var(--font);
