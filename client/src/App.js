@@ -4,6 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import Signup from './pages/Signup';
+import Login from './pages/Login';
 import './App.css';
 
 const httpLink = createHttpLink({
@@ -33,10 +35,14 @@ function App () {
           <Header />
             <div>
               <Routes>
-                {/* <Route 
-                path="/" 
-                element={<Home />}>
-                </Route> */}
+                <Route 
+                path="/signup" 
+                element={<Signup />}>
+                </Route>
+                <Route 
+                path="/login" 
+                element={<Login />}>
+                </Route>
               </Routes>
             </div>
           <Footer />    
