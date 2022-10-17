@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import Button from "react-bootstrap/Button";
+import Card from 'react-bootstrap/Card';
 
 const Login = () => {
     const [formState, setFormState] = useState({ email: '', password: ''})
@@ -31,33 +33,36 @@ const Login = () => {
     };
 
     return(
-        <main>
-            <div>
-                <div>
-                    <h4>Login</h4>
-                    <div>
-                        <form onSubmit={handleFormSubmit}>
+        <main className='card-style'>
+            <Card style={{ width: '18rem', inlineSize:"300px" ,backgroundColor: 'var(--teal)'}}>
+                <Card.Header>
+                    <h1 className="form-title">Login</h1>
+                    <Card.Body>
+                        <form onSubmit={handleFormSubmit} >
                         <input
-                            className="login-input"
+                            className="form-input"
                             placeholder="Enter your username"
                             name="email"
                             type="email"
                             id="email"
                             value={formState.email}
                             onChange={handleChange}></input>
+                            <hr></hr>
                             <input
-                            className="login-input"
-                            placeholder="Enter your email"
+                            className="form-input"
+                            placeholder="Enter your password"
                             name="password"
                             type="password"
                             id="password"
                             value={formState.password}
                             onChange={handleChange}></input>
+                            <hr></hr>
+                            <Button>Log in</Button>
                         </form>
                         {error && <div>Ooops! Login failed</div>}
-                    </div>
-                </div>
-            </div>
+                    </Card.Body>
+                </Card.Header>
+            </Card>
         </main>
     )
 }

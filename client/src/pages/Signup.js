@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import { useMutation } from '@apollo/client';
 import {ADD_USER} from "../utils/mutations";
 import Auth from '../utils/auth';
+import Button from "react-bootstrap/Button";
+import Card from 'react-bootstrap/Card';
 
 const Signup = () => {
     const [formState, setFormState] = useState({ username: '', email: '', password: ''})
@@ -31,42 +33,45 @@ const Signup = () => {
     };
 
     return(
-        <main>
-            <div className="card">
-                <div className="card-header">
-                    <h1> Sign up!</h1>
-                    <div className="card-body">
+        <main className="card-style">
+            <Card style={{ width: '18rem', backgroundColor: 'var(--teal)', inlineSize: '300px'}}>
+                <Card.Header>
+                    <h1 className="form-title"> Sign up!</h1>
+                    <Card.Body>
                         <form onSubmit={handleFormSubmit}>
                             <input
-                            className="signup-input"
-                            placeholder="Enter your username"
+                            className="form-input"
+                            placeholder="username"
                             name="username"
                             type="username"
                             id="username"
                             value={formState.username}
                             onChange={handleChange}></input>
+                            <hr></hr>
                             <input
-                            className="signup-input"
-                            placeholder="Enter your email"
+                            className="form-input"
+                            placeholder="email"
                             name="email"
                             type="email"
                             id="email"
-                            value={formState.username}
+                            value={formState.email}
                             onChange={handleChange}></input>
+                            <hr></hr>
                             <input
-                            className="signup-input"
-                            placeholder="*******"
+                            className="form-input"
+                            placeholder="password"
                             name="password"
                             type="password"
                             id="password"
-                            value={formState.username}
+                            value={formState.password}
                             onChange={handleChange}></input>
-                            <button>Enter</button>
+                            <hr></hr>
+                            <Button>Lets Go!</Button>
                         </form>
                         {error && <div>Ooops! Signup failed</div>}
-                    </div>
-                </div>
-            </div>
+                    </Card.Body>
+                </Card.Header>
+            </Card>
         </main>
     )
 }
