@@ -24,9 +24,12 @@ body {
 
 /* Header styling */
 .header {
-  /* background-color: var(--teal); */
-  position: sticky;
+  background-color: var(--teal);
+  position: fixed;
   text-align: center;
+  width: 100%;
+  left: 0;
+  top: 0;
 }
 
 .header-title {
@@ -35,15 +38,17 @@ body {
   color: var(--darkBlue);
   text-decoration: none;
   text-align: center;
-
+  padding: 20px 20px;
 }
 
 /* Footer Styling */
 .footer{
-  /* background-color: var(--teal); */
-  padding-top: 20%;
+  background-color: var(--teal);
   text-align: center;
-  position: absolute;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-title{
@@ -53,7 +58,6 @@ body {
 }
 
 /* Signup/Login Styles */
-
 .form-title{
   font-family: var(--font);
   color: var(--darkBlue);
@@ -67,7 +71,6 @@ body {
 }
 
 .form-card{
-  /* background-color: var(--teal); */
   text-align: center;
 }
 

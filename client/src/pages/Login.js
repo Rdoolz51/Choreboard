@@ -5,7 +5,7 @@ import Auth from '../utils/auth';
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
 
-const Login = () => {
+const Login = (props) => {
     const [formState, setFormState] = useState({ email: '', password: ''})
     const [login, {error}] = useMutation(LOGIN_USER);
 
@@ -41,7 +41,7 @@ const Login = () => {
                         <form onSubmit={handleFormSubmit} >
                         <input
                             className="form-input"
-                            placeholder="Enter your username"
+                            placeholder="Enter your email"
                             name="email"
                             type="email"
                             id="email"
