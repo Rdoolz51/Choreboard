@@ -1,13 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Coustard&display=swap');
+
+:root {
+  --font: 'Coustard', serif;
+  --pink: #FF66B3;
+  --lightGrey: #F0F6F6;
+  --teal: #BBE6E4;
+  --blue: #42BFDD;
+  --darkBlue: #084B83;
+  --yellow: #FFE45E;
+}
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--lightGrey);
+  background-image: url("assets/images/CleaningProducts.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* Header styling */
+.header {
+  /* background-color: var(--teal); */
+}
+
+.header-title {
+  font-family: var(--font);
+  font-size: x-large;
+  color: var(--darkBlue);
+  text-decoration: none;
+}
+
+/* Footer Styling */
+.footer{
+  /* background-color: var(--teal); */
+}
+.footer-title{
+  font-family: var(--font);
+  font-size: x-large;
+  color: var(--darkBlue);
 }
