@@ -34,7 +34,7 @@ const Login = (props) => {
 
     return(
         <main className='card-style'>
-            <Card style={{ width: '18rem', inlineSize:"300px" ,backgroundColor: 'var(--yellow)'}}>
+            <Card style={{ width: '18rem', inlineSize:"300px" ,backgroundColor: 'var(--teal)'}}>
                 <Card.Header>
                     <h1 className="form-title">Login Information</h1>
                     <Card.Body>
