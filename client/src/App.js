@@ -1,4 +1,4 @@
-import {ApolloProvider, ApolloClient, InMemoryCache, createHttpLink} from '@apollo/client';
+import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import React from 'react';
@@ -22,7 +22,7 @@ const authLink = setContext((_, { headers }) => {
       authorization: token ? `Bearer ${token}` : '',
     },
   };
-})
+});
 
 const client = new ApolloClient({
   // link: httpLink,
@@ -36,26 +36,26 @@ function App () {
       <Router>
         <div className="App">
           <Header />
-            <div>
-              <Routes>
-                <Route 
-                path="/" 
+          <div>
+            <Routes>
+              <Route
+                path="/"
                 element={<Home />}>
-                </Route>
+              </Route>
 
-                <Route 
-                path="/signup" 
+              <Route
+                path="/signup"
                 element={<Signup />}>
-                </Route>
+              </Route>
 
-                <Route 
-                path="/login" 
+              <Route
+                path="/login"
                 element={<Login />}>
-                </Route>
+              </Route>
 
-              </Routes>
-            </div>
-          <Footer />    
+            </Routes>
+          </div>
+          <Footer />
         </div>
       </Router>
     </ApolloProvider>
