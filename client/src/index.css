@@ -7,7 +7,7 @@
   --teal: #BBE6E4;
   --blue: #42BFDD;
   --darkBlue: #084B83;
-  --yellow: #FFE45E;
+  --yellow: #f8ecb2;
 }
 body {
   /* background-color: var(--lightGrey); */
@@ -16,23 +16,41 @@ body {
   background-repeat: no-repeat;
   text-align: center;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* flex-direction: column; */
+  /* align-items: center; */
+  /* justify-content: space-between; */
   min-height: 100vh;
 }
 
 /* Header styling */
 .header {
-  /* background-color: var(--teal); */
-  position: fixed;
-  text-align: center;
+  background-color: var(--yellow);
+  /* position: fixed; */
+  text-align: left;
   width: 100%;
-  left: 0;
-  top: 0;
+  display: flex;
+  /* justify-content: space-between; */
+  /* align-self: flex-start; */
+  /* left: 0; */
+  /* top: 0; */
+  border-bottom: 1px solid black;
+}
+
+.nav {
+
 }
 
 .header-title {
+  font-family: var(--font);
+  font-size: x-large;
+  color: var(--darkBlue);
+  text-decoration: none;
+  text-align: right;
+  display: flex;
+  padding: 5px 5px;
+}
+
+.link-title {
   font-family: var(--font);
   font-size: x-large;
   color: var(--darkBlue);
@@ -43,12 +61,13 @@ body {
 
 /* Footer Styling */
 .footer{
-  /* background-color: var(--teal); */
+  background-color: var(--yellow);
   text-align: center;
   position: fixed;
   left: 0;
   bottom: 0;
   width: 100%;
+  border-top: 1px solid black;
 }
 
 .footer-title{
@@ -79,3 +98,5 @@ margin-bottom: 70px;
 display: inline-block;
 text-align: center;
 }
+
+/* My Page/Logout page styling */

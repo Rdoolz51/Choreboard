@@ -12,23 +12,21 @@ const Header = () => {
     return (
         <header>
             <div className="header">
-                <Link to="/" className="header-title">
-                    <h1>Chore Board </h1>
-                </Link>
                 <nav>
+                    <Link to="/" className="header-title">
+                        <h1>Chore Board </h1>
+                    </Link>
                     {Auth.loggedIn() ? (
                         <>
-                        <Link to="/profile">My Page</Link>
-                        <a href="/" onClick={logout}>
-                            Logout
-                        </a>
+                            <Link to="/profile" className="link-title">My Page</Link>
+                            <a href="/" onClick={logout} className="link-title">Logout</a>
                         </>
                     ) : (
                         <>
-                        <Link to="/signup" className="header-title">Sign up!</Link>
-                        <Link to="/login" className="header-title">Login</Link>
+                        <Link to="/signup" className="link-title">Sign up!</Link>
+                        <Link to="/login" className="link-title">Login</Link>
                         </>
-                    )};
+                    )}
                 </nav>
             </div>
         </header>
