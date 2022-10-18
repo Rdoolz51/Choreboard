@@ -7,7 +7,7 @@
   --teal: #BBE6E4;
   --blue: #42BFDD;
   --darkBlue: #084B83;
-  --yellow: #FFE45E;
+  --yellow: #ebe0a7;
 }
 body {
   /* background-color: var(--lightGrey); */
@@ -24,7 +24,7 @@ body {
 
 /* Header styling */
 .header {
-  /* background-color: var(--teal); */
+  /* background-color: var(--yellow); */
   position: fixed;
   text-align: center;
   width: 100%;
@@ -43,7 +43,7 @@ body {
 
 /* Footer Styling */
 .footer{
-  /* background-color: var(--teal); */
+  /* background-color: var(--yellow); */
   text-align: center;
   position: fixed;
   left: 0;
