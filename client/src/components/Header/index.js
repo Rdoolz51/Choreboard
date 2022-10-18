@@ -7,12 +7,13 @@ const Header = () => {
     return (
         <header>
             <div className="header">
-                <Link to="/" className="header-title">
-                    <h1>Chore Board </h1>
-                </Link>
                 <nav>
+                    <Link to="/" className="header-title">
+                    <h1>Chore Board </h1>
+                    </Link>
                     <>
                     <Link to="/signup" className="header-title">Sign up!</Link>
+
                     <Link to="/login" className="header-title">Login</Link>
                     </>
                 </nav>

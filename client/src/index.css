@@ -24,7 +24,7 @@ body {
 
 /* Header styling */
 .header {
-  background-color: var(--teal);
+  /* background-color: var(--teal); */
   position: fixed;
   text-align: center;
   width: 100%;
@@ -38,12 +38,12 @@ body {
   color: var(--darkBlue);
   text-decoration: none;
   text-align: center;
-  padding: 20px 20px;
+  padding: 10px 10px;
 }
 
 /* Footer Styling */
 .footer{
-  background-color: var(--teal);
+  /* background-color: var(--teal); */
   text-align: center;
   position: fixed;
   left: 0;
@@ -75,7 +75,7 @@ body {
 }
 
 .card-style{
-margin-top: 100px;
+margin-top: 200px;
 display: inline-block;
 text-align: center;
 }
