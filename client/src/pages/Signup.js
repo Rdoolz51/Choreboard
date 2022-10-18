@@ -36,7 +36,7 @@ const Signup = () => {
         <main className="card-style">
             <Card style={{ width: '18rem', backgroundColor: 'var(--teal)', inlineSize: '300px'}}>
                 <Card.Header>
-                    <h1 className="form-title"> Sign up!</h1>
+                    <h1 className="form-title"> Sign up Information</h1>
                     <Card.Body>
                         <form onSubmit={handleFormSubmit}>
                             <input
@@ -66,7 +66,7 @@ const Signup = () => {
                             value={formState.password}
                             onChange={handleChange}></input>
                             <hr></hr>
-                            <Button>Lets Go!</Button>
+                            <Button type="submit">Lets Go!</Button>
                         </form>
                         {error && <div>Ooops! Signup failed</div>}
                     </Card.Body>

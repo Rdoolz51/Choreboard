@@ -36,7 +36,7 @@ const Login = (props) => {
         <main className='card-style'>
             <Card style={{ width: '18rem', inlineSize:"300px" ,backgroundColor: 'var(--teal)'}}>
                 <Card.Header>
-                    <h1 className="form-title">Login</h1>
+                    <h1 className="form-title">Login Information</h1>
                     <Card.Body>
                         <form onSubmit={handleFormSubmit} >
                         <input
@@ -57,7 +57,7 @@ const Login = (props) => {
                             value={formState.password}
                             onChange={handleChange}></input>
                             <hr></hr>
-                            <Button>Log in</Button>
+                            <Button type="submit">Log in</Button>
                         </form>
                         {error && <div>Ooops! Login failed</div>}
                     </Card.Body>
