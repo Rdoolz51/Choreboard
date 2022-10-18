@@ -19,7 +19,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 50vh;
+  min-height: 100vh;
 }
 
 /* Header styling */
@@ -75,7 +75,7 @@ body {
 }
 
 .card-style{
-margin-top: 200px;
+margin-bottom: 70px;
 display: inline-block;
 text-align: center;
 }
