@@ -8,8 +8,7 @@ const Home = () => {
         <main>
             {Auth.loggedIn() ? (
                 <>
-                    <ChoresList />
-                    <RewardsList />
+                    <h1> This will be a suggestion board</h1>
                 </>
             ) : (<h1>Please Sign In</h1>)}
         </main>

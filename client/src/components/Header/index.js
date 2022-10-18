@@ -12,8 +12,8 @@ const Header = () => {
     return (
         <header>
             <div className="header container-fluid">
-                <Link to="/" className="header-title row">
-                    <h1 classname="col-sm-3">Chore Board </h1>
+                <Link to="/profile" className="header-title row">
+                    <h1>Chore Board </h1>
                 </Link>
                 <nav>
                     {Auth.loggedIn() ? (

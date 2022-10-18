@@ -6,7 +6,7 @@ import Footer from './components/Footer';
 import Header from './components/Header';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-// import Profile from './pages/Profile';
+import Profile from './pages/Profile';
 import Home from './pages/Home';
 // import './App.css';
 
@@ -51,6 +51,11 @@ function App () {
               <Route
                 path="/login"
                 element={<Login />}>
+              </Route>
+
+              <Route
+                path="/profile"
+                element={<Profile />}>
               </Route>
 
             </Routes>

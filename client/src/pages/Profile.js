@@ -1,5 +1,7 @@
 import React from "react";
 import Auth from "../utils/auth";
+import ChoresList from "../components/ChoresList";
+import RewardsList from "../components/RewardsList";
 
 
 const Profile = () => {
@@ -7,7 +9,8 @@ const Profile = () => {
         <main>
             {Auth.loggedIn() ? (
                 <div>
-                    <h1> Thank you for signing in!</h1>
+                    <ChoresList />
+                    <RewardsList />
 
                 </div>
             ) : (<h1>Please Sign In</h1>)}
