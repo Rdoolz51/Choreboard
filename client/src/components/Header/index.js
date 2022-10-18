@@ -7,32 +7,31 @@ const Header = () => {
     const logout = event => {
         event.preventDefault();
         Auth.logout();
-    }
+    };
 
     return (
         <header>
-            <div className="header">
-                <Link to="/" className="header-title">
-                    <h1>Chore Board </h1>
+            <div className="header container-fluid">
+                <Link to="/" className="header-title row">
+                    <h1 classname="col-sm-3">Chore Board </h1>
                 </Link>
                 <nav>
                     {Auth.loggedIn() ? (
-                        <>
-                        <Link to="/profile">My Page</Link>
-                        <a href="/" onClick={logout}>
-                            Logout
-                        </a>
-                        </>
+                        <div className="rightNav">
+                            <a href="/" className="header-title" onClick={logout}>
+                                Logout
+                            </a>
+                        </div>
                     ) : (
-                        <>
-                        <Link to="/signup" className="header-title">Sign up!</Link>
-                        <Link to="/login" className="header-title">Login</Link>
-                        </>
-                    )};
+                        <div className="rightNav">
+                            <Link to="/signup" className="header-title">Sign up!</Link>
+                            <Link to="/login" className="header-title">Login</Link>
+                        </div>
+                    )}
                 </nav>
             </div>
         </header>
-    )
-}
+    );
+};
 
 export default Header;

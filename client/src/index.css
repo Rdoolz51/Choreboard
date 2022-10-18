@@ -14,22 +14,22 @@ body {
   background-image: url("assets/images/CleaningProducts.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 100vh;
 }
 
 /* Header styling */
 .header {
-  /* background-color: var(--yellow); */
-  position: fixed;
-  text-align: center;
+  background-color: var(--yellow);
+  display: flex;
+  justify-content: center;
   width: 100%;
-  left: 0;
-  top: 0;
+  position: relative;
+}
+.rightNav {
+  padding-top: 1rem;
+  position: absolute;
+  right: 2rem;
+
 }
 
 .header-title {
@@ -43,7 +43,7 @@ body {
 
 /* Footer Styling */
 .footer{
-  /* background-color: var(--yellow); */
+  background-color: var(--yellow);
   text-align: center;
   position: fixed;
   left: 0;
@@ -75,7 +75,23 @@ body {
 }
 
 .card-style{
-margin-bottom: 70px;
-display: inline-block;
+display: flex;
+justify-content: center;
 text-align: center;
+margin-top: 1rem;
+}
+
+
+/* Media Queries */
+
+@media screen {
+  @media only screen and (max-width: 600px) {
+    .header {
+      justify-content: space-between;
+    }
+    .rightNav {
+      padding-top: .5rem;
+      right: 0;
+    }
+  }
 }
