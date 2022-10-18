@@ -26,7 +26,7 @@ const Signup = () => {
                 variables: {...formState}
             });
 
-            Auth.login(data.login.token);
+            Auth.login(data.addUser.token);
         } catch(e) {
             console.error(e);
         }
@@ -34,7 +34,7 @@ const Signup = () => {
 
     return(
         <main className="card-style">
-            <Card style={{ width: '18rem', backgroundColor: 'var(--teal)', inlineSize: '300px'}}>
+            <Card style={{ width: '18rem', backgroundColor: 'var(--yellow)', inlineSize: '300px'}}>
                 <Card.Header>
                     <h1 className="form-title"> Sign up Information</h1>
                     <Card.Body>
