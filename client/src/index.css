@@ -17,9 +17,15 @@ body {
   min-height: 100vh;
 }
 
+.home-pic {
+  background-size: cover;
+  max-height: 30vh;
+  border-radius: 80px;
+
+}
 /* Header styling */
 .header {
-  background-color: var(--yellow);
+  /* background-color: var(--yellow); */
   display: flex;
   justify-content: center;
   width: 100%;
@@ -43,7 +49,7 @@ body {
 
 /* Footer Styling */
 .footer{
-  background-color: var(--yellow);
+  /* background-color: var(--yellow); */
   text-align: center;
   position: fixed;
   left: 0;
@@ -78,7 +84,8 @@ body {
 display: flex;
 justify-content: center;
 text-align: center;
-margin-top: 1rem;
+margin-top: 2rem;
+opacity: 80%;
 }
 
 
