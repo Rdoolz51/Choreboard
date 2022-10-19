@@ -9,6 +9,8 @@ import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
 import Auth from './utils/auth';
+import Chores from './pages/Chores';
+import Rewards from './pages/Rewards';
 // import './App.css';
 
 const httpLink = createHttpLink({
@@ -64,6 +66,14 @@ function App () {
                     path="/profile"
                     element={<Profile />}>
                   </Route>
+                  <Route
+                    path="/chores"
+                    element={<Chores />}>
+                  </Route>
+                  <Route
+                    path="/rewards"
+                    element={<Rewards />}>
+                  </Route>
                 </>
               ) : (
                 //if not logged in (redirecting /profile to /login)
@@ -78,6 +88,14 @@ function App () {
                   </Route>
                   <Route
                     path="/profile"
+                    element={<Navigate to="/login" />}>
+                  </Route>
+                  <Route
+                    path="/chores"
+                    element={<Navigate to="/login" />}>
+                  </Route>
+                  <Route
+                    path="/rewards"
                     element={<Navigate to="/login" />}>
                   </Route>
                 </>
