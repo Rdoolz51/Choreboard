@@ -116,15 +116,25 @@ opacity: 90%;
 @media screen {
   @media only screen and (max-width: 600px) {
     .header {
-      justify-content: space-between;
+      justify-content: center;
+      min-height: 10vh;
     }
     .header-title {
       font-size: medium;
+      line-height:6rem;
+    }
+    .header h1 {
+      padding: 0;
+      line-height: .65;
     }
     .rightNav {
-      padding-top: 1rem;
-      right: 0;
       font-size: xx-small;
+      padding-top: 0;
+      bottom: -2.3rem;
+      
+    }
+    .login {
+      margin-right: 5rem;
     }
   }
 

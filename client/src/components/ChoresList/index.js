@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import { useMutation, useQuery } from '@apollo/client';
-import { ADD_CHORE, EDIT_CHORE, REMOVE_CHORE } from '../../utils/mutations';
-import { QUERY_MYCHORES } from '../../utils/queries';
-import Auth from '../../utils/auth';
+import React from "react";
+// import { useMutation, useQuery } from '@apollo/client';
+// import { ADD_CHORE, EDIT_CHORE, REMOVE_CHORE } from '../../utils/mutations';
+
 const ChoresList = () => {
-    const { loading, error, data } = useQuery(QUERY_MYCHORES);
-    if (loading) return 'Loading...';
-    if (error) return `Error! ${error.message}`;
-    //TODO: Build chore list structure with hard coded data. Then implement mutations/queries
+
+    // const { loading, error, data } = useQuery(QUERY_MYCHORES);
+    // if (loading) return 'Loading...';
+    // if (error) return `Error! ${error.message}`;
     return (
-        // {data.choreList.map((chore) => ())}    
-        <>asd</>
+        <h1>Hello</h1>
     );
 };
+
 export default ChoresList;
