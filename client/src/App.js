@@ -1,6 +1,6 @@
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import React from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
@@ -8,6 +8,7 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
+import Auth from './utils/auth';
 // import './App.css';
 
 const httpLink = createHttpLink({
@@ -44,19 +45,40 @@ function App () {
               </Route>
 
               <Route
-                path="/signup"
-                element={<Signup />}>
+                path="*"
+                element={<Navigate to="/" />}>
               </Route>
-
-              <Route
-                path="/login"
-                element={<Login />}>
-              </Route>
-
-              <Route
-                path="/profile"
-                element={<Profile />}>
-              </Route>
+              {Auth.loggedIn() ? (
+                <>
+                  <Route
+                    path="/signup"
+                    element={<Navigate to="/" />}>
+                  </Route>
+                  <Route
+                    path="/login"
+                    element={<Navigate to="/" />}>
+                  </Route>
+                  <Route
+                    path="/profile"
+                    element={<Profile />}>
+                  </Route>
+                </>
+              ) : (
+                <>
+                  <Route
+                    path="/login"
+                    element={<Login />}>
+                  </Route>
+                  <Route
+                    path="/signup"
+                    element={<Signup />}>
+                  </Route>
+                  <Route
+                    path="/profile"
+                    element={<Navigate to="/login" />}>
+                  </Route>
+                </>
+              )}
 
             </Routes>
           </div>
