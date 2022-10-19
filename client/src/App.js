@@ -48,7 +48,9 @@ function App () {
                 path="*"
                 element={<Navigate to="/" />}>
               </Route>
+
               {Auth.loggedIn() ? (
+                //if logged in (redirecting /login and /signup to homepage)
                 <>
                   <Route
                     path="/signup"
@@ -64,6 +66,7 @@ function App () {
                   </Route>
                 </>
               ) : (
+                //if not logged in (redirecting /profile to /login)
                 <>
                   <Route
                     path="/login"
