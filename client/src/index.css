@@ -121,7 +121,7 @@ opacity: 90%;
     }
     .header-title {
       font-size: medium;
-      line-height:6rem;
+      line-height:5rem;
     }
     .header h1 {
       padding: 0;
@@ -130,11 +130,14 @@ opacity: 90%;
     .rightNav {
       font-size: xx-small;
       padding-top: 0;
-      bottom: -2.3rem;
+      bottom: 1rem;
+      height: 5vh;
       
     }
+
     .login {
       margin-right: 5rem;
+      padding-bottom: 1rem;
     }
   }
 
