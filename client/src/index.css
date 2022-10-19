@@ -32,7 +32,7 @@ body {
   position: relative;
 }
 .rightNav {
-  padding-top: 1rem;
+  padding-top: 1.25rem;
   position: absolute;
   right: 2rem;
 }
@@ -96,6 +96,9 @@ opacity: 90%;
   text-align: center;
   padding: 0.5rem;
 }
+.home-pic {
+  max-width: 100%;
+}
 
 .home-page {
   font-family: var(--font);
@@ -115,9 +118,14 @@ opacity: 90%;
     .header {
       justify-content: space-between;
     }
+    .header-title {
+      font-size: medium;
+    }
     .rightNav {
-      padding-top: .5rem;
+      padding-top: 1rem;
       right: 0;
+      font-size: xx-small;
     }
   }
+
 }

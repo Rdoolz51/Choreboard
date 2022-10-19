@@ -12,12 +12,13 @@ const Header = () => {
     return (
         <header>
             <div className="header container-fluid">
-                <Link to="/profile" className="header-title row">
+                <Link to="/" className="header-title row">
                     <h1>Chore Board </h1>
                 </Link>
                 <nav>
                     {Auth.loggedIn() ? (
                         <div className="rightNav">
+                            <a href="/profile" className="header-title">Profile</a>
                             <a href="/" className="header-title" onClick={logout}>
                                 Logout
                             </a>
