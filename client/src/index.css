@@ -25,7 +25,7 @@ body {
 }
 /* Header styling */
 .header {
-  /* background-color: var(--yellow); */
+  background-color: var(--yellow);
   display: flex;
   justify-content: center;
   width: 100%;
@@ -35,7 +35,6 @@ body {
   padding-top: 1rem;
   position: absolute;
   right: 2rem;
-
 }
 
 .header-title {
@@ -49,7 +48,7 @@ body {
 
 /* Footer Styling */
 .footer{
-  /* background-color: var(--yellow); */
+  background-color: var(--yellow);
   text-align: center;
   position: fixed;
   left: 0;
@@ -85,7 +84,27 @@ display: flex;
 justify-content: center;
 text-align: center;
 margin-top: 2rem;
-opacity: 80%;
+opacity: 90%;
+}
+
+/* Homepage Styling */
+
+.home-page-title{
+  font-family: var(--font);
+  font-size: xx-large;
+  color: var(--darkBlue);
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.home-page {
+  font-family: var(--font);
+  font-size: x-large;
+  color: var(--darkBlue);
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 10px;
+  text-align: start;
 }
 
 
