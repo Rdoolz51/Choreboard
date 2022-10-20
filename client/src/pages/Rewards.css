@@ -68,7 +68,7 @@
     position: absolute;
     left: 40%;
   }
-  .addChoreBtn--rewards {
+  .addRewardBtn--rewards {
     margin-top: .2rem ;
   }
   .noBorder--rewards {
@@ -113,7 +113,7 @@
   .active-content--rewards {
     display: block;
   }
-  .addChoreModal--rewards {
+  .addRewardsModal--rewards {
     margin-top: 5rem;
   }
   
@@ -131,7 +131,7 @@
       position: absolute;
       left: 25%;
     }
-    .addChoreBtn--rewards {
+    .addRewardsBtn--rewards {
       top: 0.15rem;
       right: .3rem;
       margin-top: .05rem;

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Form, Modal, Button } from "react-bootstrap";
+import { useQuery } from '@apollo/client';
+import { QUERY_MYREWARDS } from "../../utils/queries";
 
 const RewardsList = () => {
     const [show, setShow] = useState(false);
@@ -13,6 +15,10 @@ const RewardsList = () => {
     const handleShow = () => {
       tabSelected === 1 && setShow(true);
     };
+
+    const { loading, error, data } = useQuery(QUERY_MYREWARDS);
+    if(loading) return 'Loading...'
+    if (error) return `Error! ${error.message}`;
   
   
     return (
@@ -32,19 +38,19 @@ const RewardsList = () => {
             <button
               className={
                 tabSelected === 2
-                  ? "tabs--rewards active-tabs--chores tab-2--chores noBorder--rewards"
+                  ? "tabs--rewards active-tabs--rewards tab-2--rewards noBorder--rewards"
                   : "tabs--rewards noBorder--rewards"
               }
               onClick={() => toggleTab(2)}
             >
-              Claimed
+              Claimed By
             </button>
             <Button
               variant="primary"
               className={
                 tabSelected === 1
-                  ? "rightNav--rewards addChoreBtn--rewards"
-                  : " rightNav--rewards addChoreBtn--rewards disableBtn--rewards"
+                  ? "rightNav--rewards addRewardBtn--rewards"
+                  : " rightNav--rewards addRewardBtn--rewards disableBtn--rewards"
               }
               onClick={handleShow}
             >
@@ -61,7 +67,17 @@ const RewardsList = () => {
               }
             >
               <div className="boardHeader--rewards">
-                <h2>Rewards</h2>
+                <h2>My Rewards</h2>
+              </div>
+
+              <div className="rewardBody--rewards mt-5">
+                {data.myRewards.rewardList.map((reward) => (
+                    <div className="card p-4">
+                        { reward.name }{" "}
+                        { reward.description }{" "} 
+                        { reward.cost }
+                    </div>
+                ))}
               </div>
             </div>
   
@@ -73,18 +89,18 @@ const RewardsList = () => {
               }
             >
               <div className="boardHeader--rewards">
-                <h2>Claimed</h2>
+                <h2>Claimed By</h2>
               </div>
             </div>
           </div>
         </div>
-        <Modal show={show} onHide={handleClose} className="addChoreModal--rewards">
+        <Modal show={show} onHide={handleClose} className="addRewardsModal--rewards">
           <Modal.Header closeButton>
             <Modal.Title>New Reward</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form>
-              <Form.Group className="mb-3" controlId="ChoreForm.ControlInput1">
+              <Form.Group className="mb-3" controlId="RewardForm.ControlInput1">
                 <Form.Label>Reward Name:</Form.Label>
                 <Form.Control
                   type="text"
@@ -94,7 +110,7 @@ const RewardsList = () => {
                   autoFocus
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="ChoreForm.ControlTextarea1">
+              <Form.Group className="mb-3" controlId="RewardForm.ControlTextarea1">
                 <Form.Label>Reward Description:</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -103,7 +119,7 @@ const RewardsList = () => {
                   placeholder="Briefly Describe The Specifics Of The Reward"
                 />
               </Form.Group>
-              <Form.Group className="mb-3" controlId="ChoreForm.ControlTextarea2">
+              <Form.Group className="mb-3" controlId="RewardForm.ControlTextarea2">
                 <Form.Label>Cost:</Form.Label>
                 <Form.Control
                   className="text-secondary"
