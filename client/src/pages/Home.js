@@ -2,12 +2,15 @@ import React from "react";
 import Auth from "../utils/auth";
 import Card from "react-bootstrap/Card";
 import homepic from "../assets/images/CleanModernBathroom.jpg";
+import './Home.css';
 
 const Home = () => {
     return (
         <main>
+            <div className="bgImg" />
+                
             {Auth.loggedIn() ? (
-                <div className="card-style">
+                <div className="card-style--home">
                     <Card
                         style={{
                             width: "50rem",
@@ -16,8 +19,8 @@ const Home = () => {
                         }}
                     >
                         <Card.Header>
-                            <h1 className="home-page-title">How to use this application</h1>
-                            <ul className="home-page">
+                            <h1 className="page-title--home">How to use this application</h1>
+                            <ul className="page--home p-4">
                                 <li>
                                     Navigate to your profile page
                                 </li>
@@ -41,7 +44,7 @@ const Home = () => {
                     </Card>
                 </div>
             ) : (
-                <div className="card-style">
+                <div className="card-style--home">
                     <Card
                         style={{
                             width: "40rem",
@@ -50,14 +53,14 @@ const Home = () => {
                         }}
                     >
                         <Card.Header>
-                            <h1 className="home-page-title">Welcome to ChoreBoard!</h1>
+                            <h1 className="page-title--home">Welcome to ChoreBoard!</h1>
                             <img
                                 src={homepic}
-                                className="home-pic"
+                                className="pic--home"
                                 alt="clean bathroom"
                             ></img>
 
-                            <p className="home-page">
+                            <p className="page--home">
                                 Welcome to the Chore Board application where we make it fun and rewarding for both parents and children. As the user you will assign household chores to be completed and create rewards for your children. Your children will then be able to purchase the rewards with the points they have accumulated from doing chores!
                             </p>
                         </Card.Header>

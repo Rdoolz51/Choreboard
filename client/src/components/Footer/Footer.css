@@ -1,0 +1,17 @@
+.footer--footer{
+    background-color: var(--yellow);
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  
+  .title--footer{
+    font-family: var(--font);
+    font-size: x-large;
+    color: var(--darkBlue);
+  }
+
+  /* Media Queries */
+  @media only screen and (max-width: 600px) {}

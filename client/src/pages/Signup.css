@@ -1,0 +1,28 @@
+.form-title--signup{
+    font-family: var(--font);
+    color: var(--darkBlue);
+    text-align: center;
+  }
+  
+  .form-input--signup{
+    font-family: var(--font);
+    color: var(--darkBlue);
+    text-align: center;
+  }
+  
+  .form-card--signup{
+    text-align: center;
+  }
+  
+  .card-style--signup{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 2rem;
+  opacity: 90%;
+  }
+
+  /* Media Queries */
+  @media only screen and (max-width: 600px) {
+
+  }

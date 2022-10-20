@@ -1,0 +1,34 @@
+.page-title--home{
+    font-family: var(--font);
+    font-size: xx-large;
+    color: var(--darkBlue);
+    text-align: center;
+    padding: 0.5rem;
+  }
+  
+  .page--home {
+    font-family: var(--font);
+    font-size: x-large;
+    color: var(--darkBlue);
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 10px;
+    text-align: start;
+  }
+  .pic--home {
+    background-size: cover;
+    max-height: 30vh;
+    border-radius: 80px;
+    max-width: 100%;
+  }
+
+  .card-style--home{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin-top: 2rem;
+    opacity: 90%;
+    }
+
+  /* Media Queries */
+  @media only screen and (max-width: 600px) {}

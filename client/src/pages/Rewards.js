@@ -1,5 +1,6 @@
 import React from 'react';
 // import Auth from '../utils/auth';
+import './Rewards.css';
 
 const Rewards = () => {
     return (

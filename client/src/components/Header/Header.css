@@ -1,0 +1,48 @@
+.header--header {
+    background-color: var(--yellow);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+  }
+  .rightNav--header {
+    padding-top: 1.25rem;
+    position: absolute;
+    right: 2rem;
+  }
+  
+  .title--header {
+    font-family: var(--font);
+    font-size: x-large;
+    color: var(--darkBlue);
+    text-decoration: none;
+    text-align: center;
+    padding: 10px 10px;
+  }
+/* Media Queries */
+  @media only screen and (max-width: 600px) {
+    .header--header {
+        justify-content: center;
+        min-height: 10vh;
+      }
+     .title--header {
+        font-size: medium;
+        line-height:5rem;
+      }
+      .header--header h1 {
+        padding: 0;
+        line-height: .65;
+      }
+      .rightNav--header {
+        font-size: xx-small;
+        padding-top: 0;
+        bottom: 1rem;
+        height: 5vh;
+        
+      }
+      .login--header {
+        margin-right: 5rem;
+        padding-bottom: 1rem;
+      }
+  }

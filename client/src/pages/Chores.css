@@ -1,0 +1,140 @@
+
+*, ::before, ::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.container--chores {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  min-height: 300px;
+  background: white;
+  margin: 100px auto 0 !important;
+  word-break: break-all;
+  border: 1px solid rgba(0, 0, 0, 0.274);
+}
+
+.cb-tabs--chores {
+  display: flex !important;
+  justify-content: flex-start !important; 
+  border-bottom: 1px solid rgba(0, 0, 0, 0.228);
+}
+.tabs--chores {
+
+  padding: 10px;
+  text-align: center;
+  width: 10%;
+  /* background: rgba(97, 96, 96, 0.247); */
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.274);
+  box-sizing: content-box;
+  position: relative;
+  outline: none;
+  box-shadow: 1px 3px 10px rgba(0, 0, 0, 0.276);
+  
+}
+.tabs--chores:not(:last-child){
+  border-right: 1px solid rgba(0, 0, 0, 0.274);
+}
+
+.active-tabs--chores  {
+  border-bottom: 1px solid transparent;
+  font-weight: bold;
+}
+
+.active-tabs--chores::before {
+  content: "";
+  display: block;
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% + 2px);
+  height: 4px;
+  background: rgb(88, 147, 241);
+}
+.tab-1--chores::before {
+  left: 50%;
+  width:calc(100% + 2px)
+}
+
+.boardHeader--chores {
+  display: flex;
+  justify-content: flex-end;
+}
+.boardHeader--chores h2 {
+  position: absolute;
+  left: 40%;
+}
+.addChoreBtn--chores {
+  margin-top: .2rem ;
+}
+.noBorder--chores {
+  border: none;
+}
+
+.rightNav--chores {
+    padding-top: 1.25rem;
+    position: absolute;
+    right: 2rem;
+  }
+  
+.content-tabs--chores {
+  flex-grow : 1;
+}
+.content--chores {
+  background: white;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+.content--chores h2 {
+  padding: 0px 0 5px 0px;
+}
+.content--chores hr {
+  width: 100px;
+  height: 2px;
+  background: #222;
+  margin-bottom: 5px;
+}
+.disableBtn--chores {
+  background-color: #838282c1 !important;
+  border-color: #222 !important;
+  cursor: default !important;
+  color: black !important;
+}
+.content--chores p {
+  width: 100%;
+  height: 100%;
+}
+.active-content--chores {
+  display: block;
+}
+.addChoreModal--chores {
+  margin-top: 5rem;
+}
+
+/* Media Queries */
+
+@media only screen and (max-width: 600px) {
+  .tabs--chores {
+    width: 25%;
+  }
+  .tab-1--chores::before {
+    left: 45%;
+    width:calc(100% + 13px)
+  }
+  .boardHeader--chores h2 {
+    position: absolute;
+    left: 25%;
+  }
+  .addChoreBtn--chores {
+    top: 0.15rem;
+    right: .3rem;
+    margin-top: .05rem;
+    
+  }
+}

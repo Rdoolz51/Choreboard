@@ -1,0 +1,28 @@
+.form-title--login{
+    font-family: var(--font);
+    color: var(--darkBlue);
+    text-align: center;
+  }
+  
+  .form-input--login{
+    font-family: var(--font);
+    color: var(--darkBlue);
+    text-align: center;
+  }
+  
+  .form-card--login{
+    text-align: center;
+  }
+  
+  .card-style--login{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 2rem;
+  opacity: 90%;
+  }
+
+
+  /* Media Queries */
+  @media only screen and (max-width: 600px) {
+  }
