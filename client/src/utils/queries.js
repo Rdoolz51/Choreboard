@@ -1,4 +1,4 @@
-const { gql } = require('apollo-server-express');
+import { gql } from "@apollo/client";
 
 //gets all users and all info
 export const QUERY_USERS = gql`

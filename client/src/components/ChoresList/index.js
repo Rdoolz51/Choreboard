@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-// import { useMutation, useQuery } from '@apollo/client';
-// import { ADD_CHORE, EDIT_CHORE, REMOVE_CHORE } from '../../utils/mutations';
+import { useMutation, useQuery } from '@apollo/client';
+import {QUERY_MYCHORES} from '../../utils/queries'
+import { ADD_CHORE, EDIT_CHORE, REMOVE_CHORE } from '../../utils/mutations';
 import { Modal, Button, Form } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -19,27 +20,13 @@ const ChoresList = () => {
       tabSelected === 1 && setShow(true)
     }
     
-    // const { loading, error, data } = useQuery(QUERY_MYCHORES);
-    // if (loading) return 'Loading...';
-    // if (error) return `Error! ${error.message}`;
+    const { loading, error, data } = useQuery(QUERY_MYCHORES);
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`; 
 
-        
 
     return (
     <>
-        {/* <div className="container">
-
-            <div className=" choreBoard">
-                <div className="choreBoardHeader">
-                    <h1 className="mt-2">My Chore Board</h1>
-                    <Button variant="primary" onClick={handleShow}>
-                        + Add Chore
-                    </Button>
-                </div>
-
-            </div>
-
-        </div> */}
         <div className="container container--chores p-0">
       <div className="cb-tabs--chores">
         <button
@@ -67,7 +54,12 @@ const ChoresList = () => {
           <h2>My Chore Board</h2>
           
             </div>
-          
+            <div className="choreBody--chores mt-5">
+            {data.myChores.choreList.filter(chore => !chore.completedBy).map((choreData) => (
+                <div className="card p-4">{choreData.name} {''} {choreData.description}{''} {choreData.pointValue}{"!"}</div>
+            ))}
+               
+            </div>
         </div>
 
         <div
@@ -77,6 +69,13 @@ const ChoresList = () => {
                 
           <h2>Completed Chores</h2>
             </div>
+        <div className="mt-5 choreBody--chores">
+            {data.myChores.choreList.filter(chore => chore.completedBy).map(filteredData => (
+                <div className="card p-4">
+                    {"The chore:"}{' '}{filteredData.name}{' '}{" was completed by: "}{' '}{filteredData.completedBy.name}{' '}{" for a total of: "}{filteredData.pointValue}{' '} {" points!"}
+                </div>
+                ))}
+        </div>
         </div>
       </div>
     </div>

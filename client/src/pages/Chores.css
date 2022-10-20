@@ -63,6 +63,7 @@
 .boardHeader--chores {
   display: flex;
   justify-content: flex-end;
+
 }
 .boardHeader--chores h2 {
   position: absolute;
@@ -115,6 +116,10 @@
 }
 .addChoreModal--chores {
   margin-top: 5rem;
+}
+.choreBody--chores {
+  overflow-y:scroll;
+  overflow-x: hidden;
 }
 
 /* Media Queries */
