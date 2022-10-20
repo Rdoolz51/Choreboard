@@ -49,7 +49,7 @@ const Home = () => {
                         style={{
                             width: "40rem",
                             backgroundColor: "var(--yellow)",
-                            inlineSize: "700px",
+                            inlineSize: "700px" 
                         }}
                     >
                         <Card.Header>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Card, Button} from 'react-bootstrap';
+import {Card, Button, ListGroup} from 'react-bootstrap';
 import ChildList from '../components/ChildList';
 import { useQuery, useMutation } from '@apollo/client';
 import { ADD_CHILD } from "../utils/mutations";
@@ -40,23 +40,25 @@ const Profile = () => {
         <main>
             <div className="bgImg" />
                 <div className="container">
-                    <div className="mt-4">
-                        <div>
-                            <Button className="addChildBtn--profile">Add Child</Button>
-                        </div>
-                        <header><h1>My Profile</h1></header>
-                        <div>
-                            <div>
-                                <h5>Username:</h5>
-                            </div>
-                            <div>
-                                <h5>Email:</h5>
-                            </div>
-                            <div>
-                                <h5>My Children</h5>
-                            </div>
-                        </div>
-                    </div>
+                    <Card className="mt-4">
+                        <Card.Title><h1>My Profile</h1></Card.Title>
+                            <Button className="addChildBtn--profile" style={{fontFamily: "var(--font)"}}>
+                                + Add Child</Button>
+                        <Card.Body>
+                            <ListGroup>
+                                <ListGroup.Item>
+                                    <h5>Username: </h5>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                    <h5>Email: </h5>
+                                </ListGroup.Item>
+                                <ListGroup.Item>
+                                    <h5>Children: </h5>
+                                </ListGroup.Item>
+                            </ListGroup>
+
+                        </Card.Body>
+                    </Card>
                 </div>
             <div>
             </div>
@@ -67,8 +69,10 @@ const Profile = () => {
                 // children={user.children}
                 />
             </div> */}
+            
         </main>
     );
 };
 
 export default Profile;
+
