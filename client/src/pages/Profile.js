@@ -34,17 +34,17 @@ const Profile = () => {
         }
       };
 
-      {/* <h1> Here will be user profile data. Including: Username, email, list of children, how many points each child has, etc...</h1>
-      <h2> Maybe have a "chores completed" counter. This can be done pretty easily I think. When we filted completedBy to show completed tasks, we just take the length and assign it to a variable</h2> */}
+      /* <h1> Here will be user profile data. Including: Username, email, list of children, how many points each child has, etc...</h1>
+      <h2> Maybe have a "chores completed" counter. This can be done pretty easily I think. When we filted completedBy to show completed tasks, we just take the length and assign it to a variable</h2> */
     return (
         <main>
             <div className="bgImg" />
                 <div className="container">
-                    <Card className="mt-4">
+                    <Card className="mt-4 card--profile" style={{backgroundColor: "var(--yellow)"}}>
                         <Card.Title><h1>My Profile</h1></Card.Title>
                             <Button className="addChildBtn--profile" style={{fontFamily: "var(--font)"}}>
                                 + Add Child</Button>
-                        <Card.Body>
+                        <Card.Body className="card-body--profile">
                             <ListGroup>
                                 <ListGroup.Item>
                                     <h5>Username: </h5>

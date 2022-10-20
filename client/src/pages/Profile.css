@@ -15,10 +15,22 @@ h5{
     font-family: var(--font);
     color: var(--darkBlue);
 }
-
+/* .card-body--profile{
+    width: 40rem;
+} */
+/* 
+.card--profile{
+    width: 40rem;
+} */
 @media only screen and (max-width: 390px) {
     h1{
         text-align: left;
         margin-left: 2rem;
+    }
+}
+@media only screen and (max-width: 390px) {
+    .card-body--profile{
+        margin-left: 0rem;
+        width: auto;
     }
 }
