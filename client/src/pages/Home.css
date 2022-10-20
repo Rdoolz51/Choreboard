@@ -1,12 +1,12 @@
 .page-title--home{
-    font-family: var(--font);
-    font-size: xx-large;
-    color: var(--darkBlue);
-    text-align: center;
-    padding: 0.5rem;
-  }
-  
-  .page--home {
+  font-family: var(--font);
+  font-size: xx-large;
+  color: var(--darkBlue);
+  text-align: center;
+  padding: 0.5rem;
+}
+
+.page--home {
     font-family: var(--font);
     font-size: x-large;
     color: var(--darkBlue);
@@ -21,14 +21,25 @@
     border-radius: 80px;
     max-width: 100%;
   }
-
+  
   .card-style--home{
     display: flex;
     justify-content: center;
     text-align: center;
     margin-top: 2rem;
     opacity: 90%;
-    }
-
+  }
+  /* Overwriting bootsrap component */
+  .card--home {
+    border-radius: 80px !important; 
+    border-radius: 80px !important; 
+  }
+/* Overwriting bootstrap component*/
+  .card-header--home{
+    border: 1px solid transparent !important;
+    background-color: transparent !important; 
+  }
+  
+  
   /* Media Queries */
   @media only screen and (max-width: 600px) {}

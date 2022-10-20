@@ -8,17 +8,18 @@ const Home = () => {
     return (
         <main>
             <div className="bgImg" />
-                
+
             {Auth.loggedIn() ? (
                 <div className="card-style--home">
                     <Card
+                        className="card--home"
                         style={{
                             width: "50rem",
                             backgroundColor: "var(--yellow)",
                             inlineSize: "1000px",
                         }}
                     >
-                        <Card.Header>
+                        <Card.Header className="card-header--home">
                             <h1 className="page-title--home">How to use this application</h1>
                             <ul className="page--home p-4">
                                 <li>
@@ -46,13 +47,14 @@ const Home = () => {
             ) : (
                 <div className="card-style--home">
                     <Card
+                        className="card--home"
                         style={{
                             width: "40rem",
                             backgroundColor: "var(--yellow)",
                             inlineSize: "700px",
                         }}
                     >
-                        <Card.Header>
+                        <Card.Header className="card-header--home">
                             <h1 className="page-title--home">Welcome to ChoreBoard!</h1>
                             <img
                                 src={homepic}
