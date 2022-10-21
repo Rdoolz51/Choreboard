@@ -1,78 +1,109 @@
-import React from "react";
-import {Card, Button, ListGroup} from 'react-bootstrap';
-import ChildList from '../components/ChildList';
-import { useQuery, useMutation } from '@apollo/client';
+import React, { useState } from "react";
+import { Form, Modal, Button, Card, ListGroup } from "react-bootstrap";
+import { useQuery, useMutation } from "@apollo/client";
 import { ADD_CHILD } from "../utils/mutations";
 import { Navigate, useParams } from "react-router-dom";
 import { QUERY_ME, QUERY_USERS } from "../utils/queries";
 import Auth from "../utils/auth";
-import './Profile.css';
-
+import "./Profile.css";
 
 const Profile = () => {
-    const [addChild] = useMutation(ADD_CHILD);
-    const {username: userParam} = useParams();
+  const [show, setShow] = useState(false);
 
-    const { loading, data } = useQuery(userParam ? QUERY_USERS : QUERY_ME, {
-        variables: { username: userParam}
-    });
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-    const user = data?.me || data?.user || {};
+  const [addChild] = useMutation(ADD_CHILD);
+  const { username: userParam } = useParams();
 
-    if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-        return <Navigate to="/profile" />;
-      }
+  const { loading, data } = useQuery(userParam ? QUERY_USERS : QUERY_ME, {
+    variables: { username: userParam },
+  });
 
+  const user = data?.me || data?.user || {};
 
-    const handleClick = async () => {
-        try {
-          await addChild({
-            variables: { id: user._id }
-          });
-        } catch (e) {
-          console.error(e);
-        }
-      };
+  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+    return <Navigate to="/profile" />;
+  }
 
-      /* <h1> Here will be user profile data. Including: Username, email, list of children, how many points each child has, etc...</h1>
-      <h2> Maybe have a "chores completed" counter. This can be done pretty easily I think. When we filted completedBy to show completed tasks, we just take the length and assign it to a variable</h2> */
-    return (
-        <main>
-            <div className="bgImg" />
-                <div className="container">
-                    <Card className="mt-4 card--profile" style={{backgroundColor: "var(--yellow)"}}>
-                        <Card.Title><h1>My Profile</h1></Card.Title>
-                            <Button className="addChildBtn--profile" style={{fontFamily: "var(--font)"}}>
-                                + Add Child</Button>
-                        <Card.Body className="card-body--profile">
-                            <ListGroup>
-                                <ListGroup.Item>
-                                    <h5>Username: </h5>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <h5>Email: </h5>
-                                </ListGroup.Item>
-                                <ListGroup.Item>
-                                    <h5>Children: </h5>
-                                </ListGroup.Item>
-                            </ListGroup>
+  const handleClick = async () => {
+    try {
+      await addChild({
+        variables: { id: user._id },
+      });
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
-                        </Card.Body>
-                    </Card>
-                </div>
-            <div>
-            </div>
-            {/* <div>
-                <ChildList 
-                // username={user.username}
-                // childCount={user.childCount}
-                // children={user.children}
-                />
-            </div> */}
-            
-        </main>
-    );
+  return (
+    <>
+      <Modal show={show} onHide={handleClose} style={{ marginTop: "5rem" }}>
+        <Modal.Header closeButton>
+          <Modal.Title>Add Child</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Childs Name:</Form.Label>
+              <Form.Control type="email" autoFocus />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="danger" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="success" onClick={handleClose}>
+            Save Child
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <div className="bgImg" />
+      <div className="container container--profile" style={{ width: "45rem" }}>
+        <Card
+          className="mt-4 card--profile"
+          style={{ backgroundColor: "var(--yellow)" }}
+        >
+          <Card.Title>
+            <h1>My Profile</h1>
+          </Card.Title>
+          <Button
+            className="addChildBtn--profile"
+            style={{ fontFamily: "var(--font)" }}
+            onClick={handleShow}
+          >
+            + Add Child
+          </Button>
+          <Card.Body className="card-body--profile">
+            <ListGroup>
+              <ListGroup.Item>
+                <h5>Username: </h5>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <h5>Email: </h5>
+              </ListGroup.Item>
+              <ListGroup.Item>
+                <h5>Password:</h5>
+              </ListGroup.Item>
+            </ListGroup>
+          </Card.Body>
+        </Card>
+
+        <Card className="mt-4 card--profile">
+          <Card.Body>
+            <ListGroup>
+              <ListGroup.Item>
+                <h5>Child:</h5>
+                <h5>Total Points:</h5>
+              </ListGroup.Item>
+            </ListGroup>
+          </Card.Body>
+        </Card>
+      </div>
+    </>
+  );
 };
 
 export default Profile;
-
