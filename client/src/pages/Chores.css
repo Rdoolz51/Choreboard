@@ -120,6 +120,12 @@
 .choreBody--chores {
   overflow-y:scroll;
   overflow-x: hidden;
+ position: absolute;
+ top: 50%;
+}
+.choreName--chores {
+  overflow-y:scroll !important; 
+  overflow-x: hidden !important;
 }
 
 /* Media Queries */

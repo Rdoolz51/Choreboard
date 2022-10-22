@@ -53,7 +53,18 @@ const ChoresList = () => {
             <div className="boardHeader--chores">
               <h2>My Chore Board</h2>
             </div>
-            <div className="choreBody--chores mt-5">
+            <div className="mt-5 card">
+              <p>Test</p>
+              <p>Test</p>
+              <p>Test</p>
+              <p>Test</p>
+              <p>Test</p>
+              <p>Test</p>
+              <p>Test</p>
+              <p>Test</p>
+              <p>Test</p>
+            </div>
+            <div className="choreBody--chores">
               {data.myChores.choreList.filter(chore => !chore.completedBy).map((choreData) => (
                 <div className="card p-4">{choreData.name} {''} {choreData.description}{''} {choreData.pointValue}{"!"}</div>
               ))}
