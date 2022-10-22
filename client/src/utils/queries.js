@@ -46,7 +46,6 @@ query Me {
       _id
       username
       email
-      password
       childCount
       children {
         _id

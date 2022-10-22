@@ -16,28 +16,41 @@ h5{
     color: var(--darkBlue);
 }
 
+/* h4{
+    display: inline-block;
+    position: relative;
+    padding: 5rem;
+    text-align: center;
+} */
+
 
 .card-body--profile{
-    width: 40rem;
+    /* width: 40rem; */
 }
 
 .card--profile{
-    /* width: 40rem; */
+    width: 40rem;
 } 
 
-@media only screen and (max-width: 390px) {
+.table--profile {
+    width: 40rem;
+    position: relative;
+}
+
+@media only screen and (max-width: 600px) {
     h1{
         text-align: left;
-        margin-left: 2rem;
+        margin-left: .5rem;
     }
 }
-@media only screen and (max-width: 390px) {
+@media only screen and (max-width: 600px) {
     .card-body--profile{
-        /* margin-left: 0rem; */
+        /* margin-left: 2rem; */
         width: 18rem;
     }
 
-    .container--profile{
+    .card--profile{
+        margin-left: 2rem;;
         width: 18rem;
     }
 }

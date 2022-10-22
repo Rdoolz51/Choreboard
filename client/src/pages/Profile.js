@@ -1,36 +1,48 @@
 import React, { useState } from "react";
-import { Form, Modal, Button, Card, ListGroup } from "react-bootstrap";
-import { useQuery, useMutation } from "@apollo/client";
+import { Form, Modal, Button, Card, ListGroup, Table } from "react-bootstrap";
+import { useQuery, useMutation, gql } from "@apollo/client";
 import { ADD_CHILD } from "../utils/mutations";
-import { Navigate, useParams } from "react-router-dom";
-import { QUERY_ME, QUERY_USERS } from "../utils/queries";
-import Auth from "../utils/auth";
 import "./Profile.css";
 
 const Profile = () => {
   const [show, setShow] = useState(false);
-
+    const [childName, setChildName] = useState(" "); 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [addChild] = useMutation(ADD_CHILD);
-  const { username: userParam } = useParams();
 
-  const { loading, data } = useQuery(userParam ? QUERY_USERS : QUERY_ME, {
-    variables: { username: userParam },
+  const { data, error, refetch } = useQuery(gql`
+  query Me {
+      me {
+        username
+        email
+        children {
+          _id
+          name
+          points
+        }
+      }
+    }
+  `,{
+    fetchPolicy: "network-only"
   });
 
   const user = data?.me || data?.user || {};
 
-  if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-    return <Navigate to="/profile" />;
-  }
+//   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+//     return <Navigate to="/profile" />;
+//   }
 
-  const handleClick = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       await addChild({
-        variables: { id: user._id },
+        variables: { id: user._id, name: childName, points: 0 }
       });
+      await refetch();
+      setShow(false);
+      setChildName("");
     } catch (e) {
       console.error(e);
     }
@@ -39,25 +51,25 @@ const Profile = () => {
   return (
     <>
       <Modal show={show} onHide={handleClose} style={{ marginTop: "5rem" }}>
+          <Form onSubmit={handleSubmit}>
         <Modal.Header closeButton>
           <Modal.Title>Add Child</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Childs Name:</Form.Label>
-              <Form.Control type="email" autoFocus />
+              <Form.Control type="text" autoFocus value={childName} onChange={(e)=> setChildName(e.target.value.trim())} />
             </Form.Group>
-          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="danger" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="success" onClick={handleClose}>
+          <Button variant="success" type="submit">
             Save Child
           </Button>
         </Modal.Footer>
+          </Form>
       </Modal>
 
       <div className="bgImg" />
@@ -79,26 +91,41 @@ const Profile = () => {
           <Card.Body className="card-body--profile">
             <ListGroup>
               <ListGroup.Item>
-                <h5>Username: </h5>
+                <h5>Username: {data && data.me.username} </h5>
               </ListGroup.Item>
               <ListGroup.Item>
-                <h5>Email: </h5>
-              </ListGroup.Item>
-              <ListGroup.Item>
-                <h5>Password:</h5>
+                <h5>Email: { data && data.me.email} </h5>
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>
         </Card>
 
-        <Card className="mt-4 card--profile">
+        <Card className="mt-4 table--profile"
+        style={{ backgroundColor: "var(--lightGrey)" }}>
           <Card.Body>
-            <ListGroup>
-              <ListGroup.Item>
-                <h5>Child:</h5>
-                <h5>Total Points:</h5>
-              </ListGroup.Item>
-            </ListGroup>
+            <Table hover>
+                <thead>
+                    <tr>
+                        <th>Child Name:</th>
+                        <th>Points:</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    { data && data.me.children.length > 0 ? data.me.children.map(kid => {
+                        console.log(kid)
+                        return (
+                        <tr key={kid._id}>
+                            <td>{kid.name}</td>
+                            <td>{kid.points}</td>
+                        </tr>
+                        )
+                    }) : (
+                        <tr key="No children">
+                             <td colSpan= {2}>Go make some babies</td>
+                        </tr>
+                    )}
+                </tbody>
+            </Table>
           </Card.Body>
         </Card>
       </div>
