@@ -2,6 +2,7 @@ import React from "react";
 import Auth from "../utils/auth";
 import Card from "react-bootstrap/Card";
 import homepic from "../assets/images/CleanModernBathroom.jpg";
+import howToPic from "../assets/images/ChildCleaning.jpg";
 import './Home.css';
 
 const Home = () => {
@@ -21,6 +22,11 @@ const Home = () => {
                     >
                         <Card.Header className="card-header--home">
                             <h1 className="page-title--home">How to use this application</h1>
+                            <img
+                                src={howToPic}
+                                className="pic--home"
+                                alt="clean bathroom"
+                            ></img>
                             <ul className="page--home p-4">
                                 <li>
                                     Navigate to your profile page
