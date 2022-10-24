@@ -6,12 +6,11 @@ import "./Profile.css";
 
 const Profile = () => {
   const [show, setShow] = useState(false);
-    const [childName, setChildName] = useState(" "); 
+  const [childName, setChildName] = useState(" ");
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
   const [addChild] = useMutation(ADD_CHILD);
-
   const { data, error, refetch } = useQuery(gql`
   query Me {
       me {
@@ -24,21 +23,22 @@ const Profile = () => {
         }
       }
     }
-  `,{
+  `, {
     fetchPolicy: "network-only"
   });
 
   const user = data?.me || data?.user || {};
 
-//   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-//     return <Navigate to="/profile" />;
-//   }
+  //   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
+  //     return <Navigate to="/profile" />;
+  //   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await addChild({
-        variables: { id: user._id, name: childName, points: 0 }
+        // whats the point of the id here? (Removed it)
+        variables: { name: childName, points: 0 }
       });
       await refetch();
       setShow(false);
@@ -51,25 +51,25 @@ const Profile = () => {
   return (
     <>
       <Modal show={show} onHide={handleClose} style={{ marginTop: "5rem" }}>
-          <Form onSubmit={handleSubmit}>
-        <Modal.Header closeButton>
-          <Modal.Title>Add Child</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Header closeButton>
+            <Modal.Title>Add Child</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Childs Name:</Form.Label>
-              <Form.Control type="text" autoFocus value={childName} onChange={(e)=> setChildName(e.target.value.trim())} />
+              <Form.Control type="text" autoFocus value={childName} onChange={(e) => setChildName(e.target.value.trim())} />
             </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="success" type="submit">
-            Save Child
-          </Button>
-        </Modal.Footer>
-          </Form>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button variant="success" type="submit">
+              Save Child
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
 
       <div className="bgImg" />
@@ -94,37 +94,36 @@ const Profile = () => {
                 <h5>Username: {data && data.me.username} </h5>
               </ListGroup.Item>
               <ListGroup.Item>
-                <h5>Email: { data && data.me.email} </h5>
+                <h5>Email: {data && data.me.email} </h5>
               </ListGroup.Item>
             </ListGroup>
           </Card.Body>
         </Card>
 
         <Card className="mt-4 table--profile"
-        style={{ backgroundColor: "var(--lightGrey)" }}>
+          style={{ backgroundColor: "var(--lightGrey)" }}>
           <Card.Body>
             <Table hover>
-                <thead>
-                    <tr>
-                        <th>Child Name:</th>
-                        <th>Points:</th>
+              <thead>
+                <tr>
+                  <th>Child Name:</th>
+                  <th>Points:</th>
+                </tr>
+              </thead>
+              <tbody>
+                {data && data.me.children.length > 0 ? data.me.children.map(kid => {
+                  return (
+                    <tr key={kid._id}>
+                      <td>{kid.name}</td>
+                      <td>{kid.points}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    { data && data.me.children.length > 0 ? data.me.children.map(kid => {
-                        console.log(kid)
-                        return (
-                        <tr key={kid._id}>
-                            <td>{kid.name}</td>
-                            <td>{kid.points}</td>
-                        </tr>
-                        )
-                    }) : (
-                        <tr key="No children">
-                             <td colSpan= {2}>Go make some babies</td>
-                        </tr>
-                    )}
-                </tbody>
+                  );
+                }) : (
+                  <tr key="No children">
+                    <td colSpan={2}>Amber Alert</td>
+                  </tr>
+                )}
+              </tbody>
             </Table>
           </Card.Body>
         </Card>

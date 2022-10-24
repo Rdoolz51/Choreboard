@@ -120,6 +120,8 @@
 .choreBody--chores {
   overflow-y:scroll;
   overflow-x: hidden;
+
+ width: 98.5%;
  position: absolute;
  top: 50%;
 }
