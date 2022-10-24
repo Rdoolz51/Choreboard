@@ -101,7 +101,7 @@ const Profile = () => {
         </Card>
 
         <Card className="mt-4 table--profile"
-          style={{ backgroundColor: "var(--lightGrey)" }}>
+          style={{ backgroundColor: "var(--yellow)" }}>
           <Card.Body>
             <Table hover>
               <thead>
@@ -110,8 +110,9 @@ const Profile = () => {
                   <th>Points:</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody style={{ backgroundColor: "var(--lightGrey)" }}>
                 {data && data.me.children.length > 0 ? data.me.children.map(kid => {
+                  console.log(kid);
                   return (
                     <tr key={kid._id}>
                       <td>{kid.name}</td>
@@ -120,7 +121,7 @@ const Profile = () => {
                   );
                 }) : (
                   <tr key="No children">
-                    <td colSpan={2}>Amber Alert</td>
+                    <td colSpan={2}>You have not added any children yet</td>
                   </tr>
                 )}
               </tbody>
