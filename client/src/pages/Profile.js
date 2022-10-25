@@ -29,15 +29,11 @@ const Profile = () => {
 
   const user = data?.me || data?.user || {};
 
-  //   if (Auth.loggedIn() && Auth.getProfile().data.username === userParam) {
-  //     return <Navigate to="/profile" />;
-  //   }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await addChild({
-        // whats the point of the id here? (Removed it)
         variables: { name: childName, points: 0 }
       });
       await refetch();
@@ -106,8 +102,8 @@ const Profile = () => {
             <Table hover>
               <thead>
                 <tr>
-                  <th>Child Name:</th>
-                  <th>Points:</th>
+                  <th>Child Name</th>
+                  <th>Points</th>
                 </tr>
               </thead>
               <tbody style={{ backgroundColor: "var(--lightGrey)" }}>
@@ -117,6 +113,9 @@ const Profile = () => {
                     <tr key={kid._id}>
                       <td>{kid.name}</td>
                       <td>{kid.points}</td>
+                      <td>
+                        <a href="/rewards" className="btn btn-sm btn-light">🛒</a>
+                      </td>
                     </tr>
                   );
                 }) : (

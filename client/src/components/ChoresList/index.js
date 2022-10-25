@@ -5,35 +5,32 @@ import { ADD_CHORE, EDIT_CHORE, REMOVE_CHORE } from '../../utils/mutations';
 import { Modal, Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const defaultChore = { name: "", description: "", pointValue: 0, completedBy: "" };
+const defaultChore = { name: "", description: "", pointValue: 0 };
 
 const ChoresList = () => {
   const [show, setShow] = useState(false);
   const [tabSelected, setTabSelected] = useState(1);
   const [newChore, setNewChore] = useState(defaultChore);
+
   const toggleTab = (index) => {
     setTabSelected(index);
   };
   const [addChore] = useMutation(ADD_CHORE);
-  // const [editChore] = useMutation(EDIT_CHORE);
+  const [editChore] = useMutation(EDIT_CHORE);
+  const [removeChore, { onCompleted }] = useMutation(REMOVE_CHORE);
   const clearAddChoreForm = () => {
-    setNewChore({ ...defaultChore, completedBy: null });
+    setNewChore({ ...defaultChore });
   };
-  // const handleComplete = async (event) => {
-  //   event.preventDefault();
-  //   try {
-  //     await editChore({
-  //       variables: {setNewChore(...newChore, completedBy: )}
-  //     });
-  //   } catch {
 
-  //   }
-  // };
+  function handleDelete (choreId) {
+    removeChore({ variables: { id: choreId } });
+    onCompleted: refetch();
+  }
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       await addChore({
-        variables: { name: newChore.name, description: newChore.description, pointValue: newChore.pointValue, completedBy: newChore.completedBy }
+        variables: { name: newChore.name, description: newChore.description, pointValue: newChore.pointValue }
       });
       await refetch();
       setShow(false);
@@ -47,6 +44,7 @@ const ChoresList = () => {
     setShow(false);
   };
 
+  const setComplete = (e, choreId) => { editChore({ variables: { id: choreId, completedBy: e.target.value } }); };
 
   const handleShow = () => {
 
@@ -83,10 +81,11 @@ const ChoresList = () => {
           <div
             className={tabSelected === 1 ? "content--chores  active-content--chores" : "content--chores"}
           >
-            <div className="boardHeader--chores">
+            <div className="boardHeader--chores mb-5">
               <h2>My Chore Board</h2>
             </div>
-            <div className="choreBody--chores">
+            <div>
+
               <Table hover responsive>
                 <thead>
                   <tr>
@@ -94,35 +93,38 @@ const ChoresList = () => {
                     <th>Chore Description</th>
                     <th>Chore Point Value</th>
                     <th>Completed By</th>
+                    <th></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {data && data.myChores.choreList.length > 0 ? data.myChores.choreList.filter(chore => !chore.completedBy).map((choreData) => (
+                  {data ? data.myChores.choreList.filter(chore => !chore.completedBy).map((choreData) => (
                     <tr key={choreData._id}>
                       <td>{choreData.name}</td>
                       <td>{choreData.description}</td>
                       <td>{choreData.pointValue}</td>
                       <td>
-                        <select onChange={(e) => { setNewChore({ ...newChore, completedBy: e.target.value }); }}>
-                          {console.log(newChore.completedBy)}
+                        <select onChange={(e) => setComplete(e, choreData._id)}>
                           <option defaultValue={""}>Select A Child</option>
                           {user.children.map((child) => (
                             <option key={child._id}
-                              value={child.name}>
+                              value={child._id}>
                               {child.name}
                             </option>
 
                           ))}
                         </select>
                       </td>
+                      <td><button onClick={() => handleDelete(choreData._id)}>🚫</button></td>
                     </tr>
                   )) : (
-                    <tr key="No Chores">
+                    <tr>
                       <td colSpan={2}>No Chores Yet!</td>
                     </tr>
                   )}
                 </tbody>
               </Table>
+            </div>
+            <div className="choreBody--chores">
 
             </div>
           </div>
@@ -133,15 +135,38 @@ const ChoresList = () => {
                 : "content--chores"
             }
           >
-            <div className="boardHeader--chores">
+            <div className="boardHeader--chores mb-5">
               <h2>Completed Chores</h2>
             </div>
+            <div>
+
+              <Table hover responsive>
+                <thead>
+                  <tr>
+                    <th>Chore Name:</th>
+                    <th>Chore Description</th>
+                    <th>Points Awarded</th>
+                    <th>Completed By</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data ? data.myChores.choreList.filter(chore => chore.completedBy).map(filteredData => (
+                    <tr key={filteredData._id}>
+                      <td>{filteredData.name}</td>
+                      <td>{filteredData.description}</td>
+                      <td>{filteredData.pointValue}</td>
+                      <td>{filteredData.completedBy.name}</td>
+                    </tr>
+                  )) : (
+                    <tr>
+                      <td>No Chores Completed</td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+            </div>
             <div className="mt-5 choreBody--chores">
-              {data.myChores.choreList.filter(chore => chore.completedBy).map(filteredData => (
-                <div className="card p-4">
-                  {"The chore:"}{' '}{filteredData.name}{' '}{" was completed by: "}{' '}{filteredData.completedBy.name}{' '}{" for a total of: "}{filteredData.pointValue}{' '} {" points!"}
-                </div>
-              ))}
+
             </div>
           </div>
         </div>
