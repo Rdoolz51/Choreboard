@@ -115,7 +115,7 @@ const ChoresList = () => {
                           ))}
                         </select>
                       </td>
-                      <td><button className="btn bg-transparent mb-2" onClick={() => handleDelete(choreData._id)}><FaTrashAlt /></button></td>
+                      <td><button className="btn bg-transparent " onClick={() => handleDelete(choreData._id)}><FaTrashAlt /></button></td>
                     </tr>
                   )) : (
                     <tr>

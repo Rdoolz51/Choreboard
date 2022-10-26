@@ -46,7 +46,7 @@ const ChangePass = (props) => {
                     <Card.Body>
                         <form onSubmit={handleFormSubmit} >
                             <input
-                                autoComplete='false'
+                                autoComplete='password'
                                 className="form-input--changePass"
                                 placeholder="Current Password"
                                 name="currentPassword"
