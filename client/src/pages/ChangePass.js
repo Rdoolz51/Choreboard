@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { CHANGE_PASSWORD} from '../utils/mutations';
+import { CHANGE_PASSWORD } from '../utils/mutations';
 import Button from "react-bootstrap/Button";
 import Card from 'react-bootstrap/Card';
 import './ChangePass.css';
 
-const defaultForm = {currentPassword: "", password: ""}
+const defaultForm = { currentPassword: "", password: "" };
 
 const ChangePass = (props) => {
     const [message, setMessage] = useState(" ");
@@ -28,12 +28,12 @@ const ChangePass = (props) => {
             const { data } = await changePassword({
                 variables: { ...formState }
             });
-            setFormState({...defaultForm});
-            setMessage("Password Changed")
-            
+            setFormState({ ...defaultForm });
+            setMessage("Password Changed");
+
         } catch (e) {
             console.error(e);
-            setMessage("Password Incorrect")
+            setMessage("Password Incorrect");
         }
     };
 
@@ -46,6 +46,7 @@ const ChangePass = (props) => {
                     <Card.Body>
                         <form onSubmit={handleFormSubmit} >
                             <input
+                                autoComplete='false'
                                 className="form-input--changePass"
                                 placeholder="Current Password"
                                 name="currentPassword"
@@ -65,7 +66,7 @@ const ChangePass = (props) => {
                             <hr></hr>
                             <Button type="submit">Change Password</Button>
                         </form>
-                        {error ? <div style={{color: "red", fontWeight: "bold"}}>{message}</div> : <div style={{color: "green", fontWeight: "bold"}}>{message}</div>}
+                        {error ? <div style={{ color: "red", fontWeight: "bold" }}>{message}</div> : <div style={{ color: "green", fontWeight: "bold" }}>{message}</div>}
                     </Card.Body>
                 </Card.Header>
             </Card>
