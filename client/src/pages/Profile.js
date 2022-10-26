@@ -91,6 +91,9 @@ const Profile = () => {
               <ListGroup.Item>
                 <h5>Email: {data && data.me.email} </h5>
               </ListGroup.Item>
+              <ListGroup.Item>
+                <Button href="/ChangePass">Change Password</Button>
+              </ListGroup.Item>
             </ListGroup>
           </Card.Body>
         </Card>

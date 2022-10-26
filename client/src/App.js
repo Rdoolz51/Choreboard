@@ -7,6 +7,7 @@ import Header from './components/Header';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Profile from './pages/Profile';
+import ChangePass from './pages/ChangePass';
 import Home from './pages/Home';
 import Auth from './utils/auth';
 import Chores from './pages/Chores';
@@ -67,6 +68,10 @@ function App () {
                     element={<Profile />}>
                   </Route>
                   <Route
+                    path="/ChangePass"
+                    element={<ChangePass />}>
+                  </Route>
+                  <Route
                     path="/chores"
                     element={<Chores />}>
                   </Route>
@@ -89,6 +94,10 @@ function App () {
                   <Route
                     path="/profile"
                     element={<Navigate to="/login" />}>
+                  </Route>
+                  <Route
+                    path="/ChangePass"
+                    element={<Navigate to="/" />}>
                   </Route>
                   <Route
                     path="/chores"

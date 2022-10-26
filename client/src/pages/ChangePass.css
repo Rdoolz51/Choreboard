@@ -1,0 +1,28 @@
+.form-title--changePass{
+    font-family: var(--font);
+    color: var(--darkBlue);
+    text-align: center;
+  }
+  
+  .form-input--changePass{
+    font-family: var(--font);
+    color: var(--darkBlue);
+    text-align: center;
+  }
+  
+  .form-card--changePass{
+    text-align: center;
+  }
+  
+  .card-style--changePass{
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin-top: 2rem;
+  opacity: 90%;
+  }
+
+
+  /* Media Queries */
+  @media only screen and (max-width: 600px) {
+  }
