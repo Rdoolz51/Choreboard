@@ -196,14 +196,31 @@ const ChoresList = () => {
               controlId="ChoreForm.ControlTextarea1"
             >
               <Form.Label>Chore Description:</Form.Label>
-              <Form.Control as="textarea" value={newChore.description} onChange={(e) => setNewChore({ ...newChore, description: e.target.value })} name="choreDesc" rows={3} placeholder="Briefly Describe The Specifics Of The Chore" />
+              <Form.Control
+                as="textarea"
+                value={newChore.description}
+                onChange={(e) => setNewChore({ ...newChore, description: e.target.value })}
+                name="choreDesc"
+                rows={3}
+                placeholder="Briefly Describe The Specifics Of The Chore" />
             </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="ChoreForm.ControlTextarea2"
             >
               <Form.Label>Point Value:</Form.Label>
-              <Form.Control value={newChore.pointValue} onChange={(e) => setNewChore({ ...newChore, pointValue: parseInt(e.target.value) })} className="text-secondary" name="chorePoints" style={{ width: 75 }} type="number" step="5" min="5" placeholder="5" required max="50"></Form.Control>
+              <Form.Control
+                value={newChore.pointValue}
+                onChange={(e) => setNewChore({ ...newChore, pointValue: parseInt(e.target.value) })}
+                className="text-secondary"
+                name="chorePoints"
+                style={{ width: 75 }}
+                type="number"
+                step="5"
+                min="5"
+                placeholder="5"
+                required max="50"
+              ></Form.Control>
 
             </Form.Group>
 

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { Form, Modal, Button, Table } from "react-bootstrap";
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery, gql, useLazyQuery } from '@apollo/client';
 import { QUERY_MYREWARDS, QUERY_ME } from "../../utils/queries";
 import { ADD_REWARD, CLAIM_REWARD, REMOVE_REWARD } from '../../utils/mutations';
 import 'bootstrap/dist/css/bootstrap.css';
 
 const defaultReward = { name: "", description: "", cost: 0 };
-
 const RewardsList = () => {
   const [show, setShow] = useState(false);
   const [tabSelected, setTabSelected] = useState(1);
@@ -14,20 +13,19 @@ const RewardsList = () => {
   const toggleTab = (index) => {
     setTabSelected(index);
   };
-  //MAKE A REMOVE REWARD MUTATION TO DELETE MESSED UP REWARDS
   const [addReward] = useMutation(ADD_REWARD);
   const [claimReward] = useMutation(CLAIM_REWARD);
-  //const [removeReward, {onCompleted }] = useMutation(REMOVE_REWARD);
+  const [removeReward, { onCompleted }] = useMutation(REMOVE_REWARD);
 
   const clearAddRewardForm = () => {
     setNewReward({ ...defaultReward });
   };
 
-  //un-comment when removeReward mutation added
-  // function handleDelete (rewardId) {
-  //   removeReward({ variables: { id: rewardId } });
-  //   onCompleted: refetch();
-  // }
+
+  function handleDelete (rewardId) {
+    removeReward({ variables: { id: rewardId } });
+    onCompleted: refetch();
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,7 +42,7 @@ const RewardsList = () => {
   };
 
   const handleClose = () => {
-    setNewChore(defaultReward);
+    setNewReward(defaultReward);
     setShow(false);
   };
 
@@ -54,9 +52,8 @@ const RewardsList = () => {
   const handleShow = () => {
     tabSelected === 1 && setShow(true);
   };
-
+  //TODO: COMBINE QUERIES TO MAKE LIFE EASIER(QUERY DOESNT RUN FOR USER)
   const queryUser = useQuery(QUERY_ME);
-
   const { loading, error, data, refetch } = useQuery(QUERY_MYREWARDS);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
@@ -132,7 +129,7 @@ const RewardsList = () => {
                       <td>
                         <select onChange={(e) => setComplete(e, rewardData._id)}>
                           <option defaultValue={""}>Select A Child</option>
-                          {user.children.map((child) => (
+                          {queryUser.data.me.children.map((child) => (
                             <option key={child._id}
                               value={child._id}>
                               {child.name}
@@ -196,16 +193,18 @@ const RewardsList = () => {
         </div>
       </div>
       <Modal show={show} onHide={handleClose} className="addRewardsModal--rewards">
-        <Modal.Header closeButton>
-          <Modal.Title>New Reward</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <Form>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Header closeButton>
+            <Modal.Title>New Reward</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
             <Form.Group className="mb-3" controlId="RewardForm.ControlInput1">
               <Form.Label>Reward Name:</Form.Label>
               <Form.Control
                 type="text"
                 name="rewardName"
+                value={newReward.name}
+                onChange={(e) => setNewReward({ ...newReward, name: e.target.value })}
                 placeholder="Enter Reward Here"
                 required
                 autoFocus
@@ -215,6 +214,8 @@ const RewardsList = () => {
               <Form.Label>Reward Description:</Form.Label>
               <Form.Control
                 as="textarea"
+                value={newReward.description}
+                onChange={(e) => setNewReward({ ...newReward, description: e.target.value })}
                 name="rewardDesc"
                 rows={3}
                 placeholder="Briefly Describe The Specifics Of The Reward"
@@ -223,27 +224,31 @@ const RewardsList = () => {
             <Form.Group className="mb-3" controlId="RewardForm.ControlTextarea2">
               <Form.Label>Cost:</Form.Label>
               <Form.Control
+                value={newReward.cost}
+                onChange={(e) => setNewReward({ ...newReward, cost: parseInt(e.target.value) })}
                 className="text-secondary"
                 name="rewardPoints"
                 style={{ width: 75 }}
                 type="number"
                 step="5"
+                //does this do anything? idk.
+                inputMode="numeric"
                 min="5"
                 placeholder="5"
                 required
                 max="50"
               ></Form.Control>
             </Form.Group>
-          </Form>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="danger" onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button type="submit" variant="success" onClick={handleClose}>
-            Add Reward
-          </Button>
-        </Modal.Footer>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="danger" onClick={handleClose}>
+              Cancel
+            </Button>
+            <Button type="submit" variant="success">
+              Add Reward
+            </Button>
+          </Modal.Footer>
+        </Form>
       </Modal>
     </>
   );
