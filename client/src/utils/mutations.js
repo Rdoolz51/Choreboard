@@ -86,7 +86,13 @@ export const CLAIM_REWARD = gql`
         }
     }
 `;
-
+export const REMOVE_REWARD = gql`
+    mutation RemoveReward($id: ID!) {
+        removeReward(_id: $id) {
+        _id
+        }
+    }
+`;
 
 export const ADD_CHILD = gql`
     mutation AddChild($name: String!, $points: Int) {

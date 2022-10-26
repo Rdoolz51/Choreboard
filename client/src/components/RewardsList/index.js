@@ -1,25 +1,67 @@
 import React, { useState } from "react";
-import { Form, Modal, Button } from "react-bootstrap";
-import { useQuery } from '@apollo/client';
-import { QUERY_MYREWARDS } from "../../utils/queries";
+import { Form, Modal, Button, Table } from "react-bootstrap";
+import { useMutation, useQuery } from '@apollo/client';
+import { QUERY_MYREWARDS, QUERY_ME } from "../../utils/queries";
+import { ADD_REWARD, CLAIM_REWARD, REMOVE_REWARD } from '../../utils/mutations';
+import 'bootstrap/dist/css/bootstrap.css';
+
+const defaultReward = { name: "", description: "", cost: 0 };
 
 const RewardsList = () => {
   const [show, setShow] = useState(false);
   const [tabSelected, setTabSelected] = useState(1);
+  const [newReward, setNewReward] = useState(defaultReward);
   const toggleTab = (index) => {
     setTabSelected(index);
   };
+  //MAKE A REMOVE REWARD MUTATION TO DELETE MESSED UP REWARDS
+  const [addReward] = useMutation(ADD_REWARD);
+  const [claimReward] = useMutation(CLAIM_REWARD);
+  //const [removeReward, {onCompleted }] = useMutation(REMOVE_REWARD);
 
-  const handleClose = () => setShow(false);
+  const clearAddRewardForm = () => {
+    setNewReward({ ...defaultReward });
+  };
+
+  //un-comment when removeReward mutation added
+  // function handleDelete (rewardId) {
+  //   removeReward({ variables: { id: rewardId } });
+  //   onCompleted: refetch();
+  // }
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      await addReward({
+        variables: { name: newReward.name, description: newReward.description, cost: newReward.cost }
+      });
+      await refetch();
+      setShow(false);
+      clearAddRewardForm();
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const handleClose = () => {
+    setNewChore(defaultReward);
+    setShow(false);
+  };
+
+  const setComplete = (e, rewardId) => { claimReward({ variables: { id: rewardId, claimedBy: e.target.value } }); };
+
 
   const handleShow = () => {
     tabSelected === 1 && setShow(true);
   };
 
-  const { loading, error, data } = useQuery(QUERY_MYREWARDS);
+  const queryUser = useQuery(QUERY_ME);
+
+  const { loading, error, data, refetch } = useQuery(QUERY_MYREWARDS);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
+  const user = queryUser.data?.me;
 
   return (
     <>
@@ -66,18 +108,48 @@ const RewardsList = () => {
                 : "content--rewards"
             }
           >
-            <div className="boardHeader--rewards">
+            <div className="boardHeader--rewards mb-5">
               <h2>My Rewards</h2>
             </div>
+            <div>
 
-            <div className="rewardBody--rewards mt-5">
-              {data.myRewards.rewardList.map((reward) => (
-                <div className="card p-4">
-                  {reward.name}{" "}
-                  {reward.description}{" "}
-                  {reward.cost}
-                </div>
-              ))}
+              <Table hover responsive>
+                <thead>
+                  <tr>
+                    <th>Reward Name</th>
+                    <th>Reward Description</th>
+                    <th>Reward Cost</th>
+                    <th>Claim Reward</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data ? data.myRewards.rewardList.filter(reward => !reward.claimedBy).map((rewardData) => (
+                    <tr key={rewardData._id}>
+                      <td>{rewardData.name}</td>
+                      <td>{rewardData.description}</td>
+                      <td>{rewardData.cost}</td>
+                      <td>
+                        <select onChange={(e) => setComplete(e, rewardData._id)}>
+                          <option defaultValue={""}>Select A Child</option>
+                          {user.children.map((child) => (
+                            <option key={child._id}
+                              value={child._id}>
+                              {child.name}
+                            </option>
+
+                          ))}
+                        </select>
+                      </td>
+                      <td><button onClick={() => handleDelete(rewardData._id)}>🚫</button></td>
+                    </tr>
+                  )) : (
+                    <tr>
+                      <td colSpan={2}>No Rewards Yet!</td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
             </div>
           </div>
 
@@ -88,8 +160,37 @@ const RewardsList = () => {
                 : "content--rewards"
             }
           >
-            <div className="boardHeader--rewards">
+            <div className="boardHeader--rewards mb-5">
               <h2>Claimed By</h2>
+            </div>
+            <div>
+              <Table hover responsive>
+                <thead>
+                  <tr>
+                    <th>Reward Name</th>
+                    <th>Reward Description</th>
+                    <th>Points Deducted</th>
+                    <th>Claimed By</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {data ? data.myRewards.rewardList.filter(reward => reward.claimedBy).map(filteredData => (
+                    <tr key={filteredData._id}>
+                      <td>{filteredData.name}</td>
+                      <td>{filteredData.description}</td>
+                      <td>{filteredData.cost}</td>
+                      <td>{filteredData.claimedBy.name}</td>
+                    </tr>
+                  )) : (
+                    <tr>
+                      <td>No Rewards Completed</td>
+                    </tr>
+                  )}
+                </tbody>
+              </Table>
+            </div>
+            <div className="mt-5 rewardBody--rewards">
+
             </div>
           </div>
         </div>

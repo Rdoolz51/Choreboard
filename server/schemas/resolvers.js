@@ -215,6 +215,20 @@ const resolvers = {
         throw new AuthenticationError("Not Logged In");
       }
     },
+    removeReward: async (parent, { _id }, context) => {
+      if (context.user) {
+        const user = await User.findOne({ _id: context.user._id });
+        for (let i = 0; i < user.rewardList.length; i++) {
+          if (_id === user.rewardList[i].toString()) {
+            const reward = await Reward.findOneAndDelete(
+              { _id: _id }
+            );
+          }
+        }
+      } else {
+        throw new AuthenticationError("Not Logged In");
+      }
+    },
     //addChild
     addChild: async (parent, args, context) => {
       if (context.user) {
