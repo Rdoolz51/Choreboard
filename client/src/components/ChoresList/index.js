@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useMutation, useQuery } from '@apollo/client';
-import { QUERY_MYCHORES, QUERY_ME } from '../../utils/queries';
+import { QUERY_ME } from '../../utils/queries';
 import { ADD_CHORE, EDIT_CHORE, REMOVE_CHORE } from '../../utils/mutations';
 import { Modal, Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -50,12 +50,12 @@ const ChoresList = () => {
 
     tabSelected === 1 && setShow(true);
   };
-  const queryUser = useQuery(QUERY_ME);
-  const { loading, error, data, refetch } = useQuery(QUERY_MYCHORES);
+  // const queryUser = useQuery(QUERY_ME);
+  const { loading, error, data, refetch } = useQuery(QUERY_ME);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
-  const user = queryUser.data?.me;
+  // const user = queryUser.data?.me;
 
   return (
     <>
@@ -97,7 +97,7 @@ const ChoresList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data ? data.myChores.choreList.filter(chore => !chore.completedBy).map((choreData) => (
+                  {data ? data.me.choreList.filter(chore => !chore.completedBy).map((choreData) => (
                     <tr key={choreData._id}>
                       <td>{choreData.name}</td>
                       <td>{choreData.description}</td>
@@ -105,7 +105,7 @@ const ChoresList = () => {
                       <td>
                         <select onChange={(e) => setComplete(e, choreData._id)}>
                           <option defaultValue={""}>Select A Child</option>
-                          {user.children.map((child) => (
+                          {data.me.children.map((child) => (
                             <option key={child._id}
                               value={child._id}>
                               {child.name}
@@ -150,7 +150,7 @@ const ChoresList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data ? data.myChores.choreList.filter(chore => chore.completedBy).map(filteredData => (
+                  {data ? data.me.choreList.filter(chore => chore.completedBy).map(filteredData => (
                     <tr key={filteredData._id}>
                       <td>{filteredData.name}</td>
                       <td>{filteredData.description}</td>

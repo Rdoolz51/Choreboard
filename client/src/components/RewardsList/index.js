@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Modal, Button, Table } from "react-bootstrap";
 import { useMutation, useQuery, gql, useLazyQuery } from '@apollo/client';
-import { QUERY_MYREWARDS, QUERY_ME } from "../../utils/queries";
+import { QUERY_ME } from "../../utils/queries";
 import { ADD_REWARD, CLAIM_REWARD, REMOVE_REWARD } from '../../utils/mutations';
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -53,12 +53,12 @@ const RewardsList = () => {
     tabSelected === 1 && setShow(true);
   };
   //TODO: COMBINE QUERIES TO MAKE LIFE EASIER(QUERY DOESNT RUN FOR USER)
-  const queryUser = useQuery(QUERY_ME);
-  const { loading, error, data, refetch } = useQuery(QUERY_MYREWARDS);
+  // const queryUser = useQuery(QUERY_ME);
+  const { loading, error, data, refetch } = useQuery(QUERY_ME);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
-  const user = queryUser.data?.me;
+  // const user = queryUser.data?.me;
 
   return (
     <>
@@ -121,7 +121,7 @@ const RewardsList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data ? data.myRewards.rewardList.filter(reward => !reward.claimedBy).map((rewardData) => (
+                  {data ? data.me.rewardList.filter(reward => !reward.claimedBy).map((rewardData) => (
                     <tr key={rewardData._id}>
                       <td>{rewardData.name}</td>
                       <td>{rewardData.description}</td>
@@ -129,7 +129,7 @@ const RewardsList = () => {
                       <td>
                         <select onChange={(e) => setComplete(e, rewardData._id)}>
                           <option defaultValue={""}>Select A Child</option>
-                          {queryUser.data.me.children.map((child) => (
+                          {data.me.children.map((child) => (
                             <option key={child._id}
                               value={child._id}>
                               {child.name}
@@ -171,7 +171,7 @@ const RewardsList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data ? data.myRewards.rewardList.filter(reward => reward.claimedBy).map(filteredData => (
+                  {data ? data.me.rewardList.filter(reward => reward.claimedBy).map(filteredData => (
                     <tr key={filteredData._id}>
                       <td>{filteredData.name}</td>
                       <td>{filteredData.description}</td>
