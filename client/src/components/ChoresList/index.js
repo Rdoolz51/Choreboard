@@ -4,6 +4,7 @@ import { QUERY_ME } from '../../utils/queries';
 import { ADD_CHORE, EDIT_CHORE, REMOVE_CHORE } from '../../utils/mutations';
 import { Modal, Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const defaultChore = { name: "", description: "", pointValue: 5 };
 
@@ -91,7 +92,7 @@ const ChoresList = () => {
                   <tr>
                     <th>Chore Name:</th>
                     <th>Chore Description</th>
-                    <th>Chore Point Value</th>
+                    <th>Point Value</th>
                     <th>Completed By</th>
                     <th></th>
                   </tr>
@@ -114,7 +115,7 @@ const ChoresList = () => {
                           ))}
                         </select>
                       </td>
-                      <td><button onClick={() => handleDelete(choreData._id)}>🚫</button></td>
+                      <td><button className="btn bg-transparent mb-2" onClick={() => handleDelete(choreData._id)}><FaTrashAlt /></button></td>
                     </tr>
                   )) : (
                     <tr>
@@ -123,9 +124,6 @@ const ChoresList = () => {
                   )}
                 </tbody>
               </Table>
-            </div>
-            <div className="choreBody--chores">
-
             </div>
           </div>
           <div
@@ -164,9 +162,6 @@ const ChoresList = () => {
                   )}
                 </tbody>
               </Table>
-            </div>
-            <div className="mt-5 choreBody--chores">
-
             </div>
           </div>
         </div>

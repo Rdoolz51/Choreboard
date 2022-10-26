@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Form, Modal, Button, Card, ListGroup, Table } from "react-bootstrap";
 import { useQuery, useMutation, gql } from "@apollo/client";
-import { ADD_CHILD } from "../utils/mutations";
+import { ADD_CHILD, REMOVE_CHILD } from "../utils/mutations";
 import "./Profile.css";
+import { FaTrashAlt, FaShoppingCart } from 'react-icons/fa';
 
 const Profile = () => {
   const [show, setShow] = useState(false);
@@ -11,7 +12,8 @@ const Profile = () => {
   const handleShow = () => setShow(true);
 
   const [addChild] = useMutation(ADD_CHILD);
-  const {loading, data, error, refetch } = useQuery(gql`
+  const [deleteChild, { onCompleted }] = useMutation(REMOVE_CHILD);
+  const { loading, data, error, refetch } = useQuery(gql`
   query Me {
       me {
         username
@@ -43,6 +45,11 @@ const Profile = () => {
     }
   };
 
+  const handleDeleteChild = async (childId) => {
+    deleteChild({ variables: { id: childId } });
+    onCompleted: refetch();
+  };
+
   return (
     <>
       <Modal show={show} onHide={handleClose} style={{ marginTop: "5rem" }}>
@@ -68,7 +75,7 @@ const Profile = () => {
       </Modal>
 
       <div className="bgImg" />
-      <div className="container container--profile" style={{ width: "45rem" }}>
+      <div className="container container--profile" style={{ width: "42rem" }}>
         <Card
           className="mt-4 card--profile"
           style={{ backgroundColor: "var(--yellow)" }}
@@ -76,13 +83,6 @@ const Profile = () => {
           <Card.Title>
             <h1>My Profile</h1>
           </Card.Title>
-          <Button
-            className="addChildBtn--profile"
-            style={{ fontFamily: "var(--font)" }}
-            onClick={handleShow}
-          >
-            + Add Child
-          </Button>
           <Card.Body className="card-body--profile">
             <ListGroup>
               <ListGroup.Item>
@@ -116,8 +116,9 @@ const Profile = () => {
                       <td>{kid.name}</td>
                       <td>{kid.points}</td>
                       <td>
-                        <a href="/rewards" className="btn btn-sm btn-light">🛒</a>
+                        <a href="/rewards" className="btn btn-light bg-transparent" data-toggle="tooltip" title="Rewards"><FaShoppingCart /></a>
                       </td>
+                      <td><button className="btn btn-light bg-transparent" data-toggle="tooltip" title="Delete Child" onClick={() => handleDeleteChild(kid._id)}><FaTrashAlt /></button></td>
                     </tr>
                   );
                 }) : (
@@ -127,6 +128,11 @@ const Profile = () => {
                 )}
               </tbody>
             </Table>
+            <Button
+              variant="primary"
+              className="addChildBtn--profile"
+              stlye={{ fontFamily: "var(--font)" }}
+              onClick={handleShow}>Add A Child</Button>
           </Card.Body>
         </Card>
       </div>

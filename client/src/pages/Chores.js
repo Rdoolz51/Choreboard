@@ -5,7 +5,10 @@ import './Chores.css';
 
 const Chores = () => {
     return (
-        <ChoresList />
+        <>
+            <div className="bgImg" />
+            <ChoresList />
+        </>
     );
 };
 

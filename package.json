@@ -8,7 +8,6 @@
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
     "install": "cd server && npm i && cd ../client && npm i && npm run build",
     "seed": "cd server && npm run seed"
-
   },
   "devDependencies": {
     "concurrently": "^7.4.0"
@@ -22,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/Rdoolz51/Choreboard/issues"
   },
-  "homepage": "https://github.com/Rdoolz51/Choreboard#readme"
+  "homepage": "https://github.com/Rdoolz51/Choreboard#readme",
+  "dependencies": {
+    "react-icons": "^4.6.0"
+  }
 }
