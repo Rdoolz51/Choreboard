@@ -5,7 +5,7 @@ import { ADD_CHORE, EDIT_CHORE, REMOVE_CHORE } from '../../utils/mutations';
 import { Modal, Button, Form, Table } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 
-const defaultChore = { name: "", description: "", pointValue: 0 };
+const defaultChore = { name: "", description: "", pointValue: 5 };
 
 const ChoresList = () => {
   const [show, setShow] = useState(false);
