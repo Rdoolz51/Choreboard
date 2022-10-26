@@ -11,7 +11,7 @@ const Profile = () => {
   const handleShow = () => setShow(true);
 
   const [addChild] = useMutation(ADD_CHILD);
-  const { data, error, refetch } = useQuery(gql`
+  const {loading, data, error, refetch } = useQuery(gql`
   query Me {
       me {
         username
@@ -26,9 +26,8 @@ const Profile = () => {
   `, {
     fetchPolicy: "network-only"
   });
-
-  const user = data?.me || data?.user || {};
-
+  if (loading) return 'Loading...';
+  if (error) return `Error! ${error.message}`;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
