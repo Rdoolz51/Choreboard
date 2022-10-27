@@ -207,6 +207,7 @@ const resolvers = {
               { claimedBy },
               { new: true }
             );
+
             await Child.findByIdAndUpdate({ _id: claimedBy }, { $inc: { 'points': (user.rewardList[i].cost * -1) } });
             return reward;
           }

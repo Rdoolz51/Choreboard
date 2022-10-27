@@ -4,6 +4,7 @@ import { useMutation, useQuery, gql, useLazyQuery } from '@apollo/client';
 import { QUERY_ME } from "../../utils/queries";
 import { ADD_REWARD, CLAIM_REWARD, REMOVE_REWARD } from '../../utils/mutations';
 import 'bootstrap/dist/css/bootstrap.css';
+import { FaTrashAlt } from 'react-icons/fa';
 
 const defaultReward = { name: "", description: "", cost: 0 };
 const RewardsList = () => {
@@ -46,7 +47,16 @@ const RewardsList = () => {
     setShow(false);
   };
 
-  const setComplete = (e, rewardId) => { claimReward({ variables: { id: rewardId, claimedBy: e.target.value } }); };
+  const setComplete = (e, rewardId) => {
+    e.preventDefault();
+    console.log(e.target);
+    claimReward({
+      variables: {
+        id: rewardId,
+        claimedBy: e.target.value
+      }
+    });
+  };
 
 
   const handleShow = () => {
@@ -119,7 +129,7 @@ const RewardsList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data ? data.me.rewardList.filter(reward => !reward.claimedBy).map((rewardData) => (
+                  {data ? data.me.rewardList.filter(reward => reward.claimedBy).map((rewardData) => (
                     <tr key={rewardData._id}>
                       <td>{rewardData.name}</td>
                       <td>{rewardData.description}</td>
@@ -136,7 +146,7 @@ const RewardsList = () => {
                           ))}
                         </select>
                       </td>
-                      <td><button onClick={() => handleDelete(rewardData._id)}>🚫</button></td>
+                      <td><button className="btn bg-transparent" onClick={() => handleDelete(rewardData._id)}><FaTrashAlt /></button></td>
                     </tr>
                   )) : (
                     <tr>

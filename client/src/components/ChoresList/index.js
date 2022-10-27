@@ -51,12 +51,10 @@ const ChoresList = () => {
 
     tabSelected === 1 && setShow(true);
   };
-  // const queryUser = useQuery(QUERY_ME);
   const { loading, error, data, refetch } = useQuery(QUERY_ME);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
-  // const user = queryUser.data?.me;
 
   return (
     <>

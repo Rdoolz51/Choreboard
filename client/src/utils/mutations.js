@@ -78,8 +78,8 @@ export const ADD_REWARD = gql`
 `;
 
 export const CLAIM_REWARD = gql`
-    mutation EditReward($id: ID!, $claimedBy: ID!) {
-        editReward(_id: $id, claimedBy: $claimedBy) {
+    mutation ClaimReward($id: ID!, $claimedBy: ID!) {
+        claimReward(_id: $id, claimedBy: $claimedBy) {
             claimedBy {
                 _id
             }
