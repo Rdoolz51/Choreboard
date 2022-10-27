@@ -4,7 +4,8 @@ const childSchema = new Schema(
     {
         name: {
             type: String,
-            required: true
+            required: true,
+            length: 1
         },
         points: {
             type: Number,

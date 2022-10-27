@@ -215,18 +215,7 @@ const resolvers = {
         );
         await Child.findByIdAndUpdate({ _id: claimedBy }, { $inc: { 'points': (rewardToUpdate.cost * -1) } });
         return updatedReward;
-        // for (let i = 0; i < user.rewardList.length; i++) {
-        //   if (_id === user.rewardList[i]._id.toString()) {
-        //     const reward = await Reward.findByIdAndUpdate(
-        //       { _id: _id },
-        //       { claimedBy },
-        //       { new: true }
-        //     );
 
-        //     await Child.findByIdAndUpdate({ _id: claimedBy }, { $inc: { 'points': (user.rewardList[i].cost * -1) } });
-        //     return reward;
-        //   }
-        // }
       } else {
         throw new AuthenticationError("Not Logged In");
       }
