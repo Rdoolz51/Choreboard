@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Form, Modal, Button, Table } from "react-bootstrap";
-import { useMutation, useQuery, gql, useLazyQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { QUERY_ME } from "../../utils/queries";
 import { ADD_REWARD, CLAIM_REWARD, REMOVE_REWARD } from '../../utils/mutations';
 import 'bootstrap/dist/css/bootstrap.css';
@@ -16,7 +16,7 @@ const RewardsList = () => {
   };
   const [addReward] = useMutation(ADD_REWARD);
   const [claimReward] = useMutation(CLAIM_REWARD);
-  const [removeReward, { onCompleted }] = useMutation(REMOVE_REWARD);
+  const [removeReward] = useMutation(REMOVE_REWARD);
   const { loading, error, data, refetch } = useQuery(QUERY_ME);
 
   const clearAddRewardForm = () => {
@@ -238,7 +238,6 @@ const RewardsList = () => {
                 style={{ width: 75 }}
                 type="number"
                 step="5"
-                //does this do anything? idk.
                 inputMode="numeric"
                 min="5"
                 placeholder="5"

@@ -12,7 +12,6 @@ import Home from './pages/Home';
 import Auth from './utils/auth';
 import Chores from './pages/Chores';
 import Rewards from './pages/Rewards';
-// import './App.css';
 
 const httpLink = createHttpLink({
   uri: '/graphql',

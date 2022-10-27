@@ -20,14 +20,14 @@ const ChoresList = () => {
   };
   const [addChore] = useMutation(ADD_CHORE);
   const [editChore] = useMutation(EDIT_CHORE);
-  const [removeChore, { onCompleted }] = useMutation(REMOVE_CHORE);
+  const [removeChore] = useMutation(REMOVE_CHORE);
   const clearAddChoreForm = () => {
     setNewChore({ ...defaultChore });
   };
 
   function handleDelete (choreId) {
     removeChore({ variables: { id: choreId } });
-    onCompleted: refetch();
+    refetch();
   }
   const handleSubmit = async (event) => {
     event.preventDefault();

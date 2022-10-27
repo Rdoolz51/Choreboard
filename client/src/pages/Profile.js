@@ -110,7 +110,6 @@ const Profile = () => {
               </thead>
               <tbody style={{ backgroundColor: "var(--lightGrey)" }}>
                 {data && data.me.children.length > 0 ? data.me.children.map(kid => {
-                  console.log(kid);
                   return (
                     <tr key={kid._id}>
                       <td>{kid.name}</td>
