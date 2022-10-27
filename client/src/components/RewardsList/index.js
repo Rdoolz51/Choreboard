@@ -17,15 +17,16 @@ const RewardsList = () => {
   const [addReward] = useMutation(ADD_REWARD);
   const [claimReward] = useMutation(CLAIM_REWARD);
   const [removeReward, { onCompleted }] = useMutation(REMOVE_REWARD);
+  const { loading, error, data, refetch } = useQuery(QUERY_ME);
 
   const clearAddRewardForm = () => {
     setNewReward({ ...defaultReward });
   };
 
 
-  function handleDelete (rewardId) {
-    removeReward({ variables: { id: rewardId } });
-    onCompleted: refetch();
+  async function handleDelete (rewardId) {
+    await removeReward({ variables: { id: rewardId } });
+    refetch();
   }
 
   const handleSubmit = async (event) => {
@@ -47,15 +48,14 @@ const RewardsList = () => {
     setShow(false);
   };
 
-  const setComplete = (e, rewardId) => {
-    e.preventDefault();
-    console.log(e.target);
-    claimReward({
+  const setComplete = async (e, rewardId) => {
+    await claimReward({
       variables: {
         id: rewardId,
         claimedBy: e.target.value
       }
     });
+    refetch();
   };
 
 
@@ -63,7 +63,6 @@ const RewardsList = () => {
     tabSelected === 1 && setShow(true);
   };
 
-  const { loading, error, data, refetch } = useQuery(QUERY_ME);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
@@ -129,7 +128,7 @@ const RewardsList = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {data ? data.me.rewardList.filter(reward => reward.claimedBy).map((rewardData) => (
+                  {data ? data.me.rewardList.filter(reward => !reward.claimedBy).map((rewardData) => (
                     <tr key={rewardData._id}>
                       <td>{rewardData.name}</td>
                       <td>{rewardData.description}</td>

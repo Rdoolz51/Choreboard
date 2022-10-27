@@ -1,4 +1,4 @@
-const { AuthenticationError } = require("apollo-server-express");
+const { AuthenticationError, ForbiddenError } = require("apollo-server-express");
 const { User, Chore, Reward, Child } = require("../models");
 const { signToken } = require("../utils/auth");
 
@@ -200,18 +200,33 @@ const resolvers = {
     claimReward: async (parent, { _id, claimedBy }, context) => {
       if (context.user) {
         const user = await User.findOne({ _id: context.user._id }).populate('rewardList');
-        for (let i = 0; i < user.rewardList.length; i++) {
-          if (_id === user.rewardList[i]._id.toString()) {
-            const reward = await Reward.findByIdAndUpdate(
-              { _id: _id },
-              { claimedBy },
-              { new: true }
-            );
-
-            await Child.findByIdAndUpdate({ _id: claimedBy }, { $inc: { 'points': (user.rewardList[i].cost * -1) } });
-            return reward;
-          }
+        const rewardToUpdate = user.rewardList.find(r => r._id.toString() === _id);
+        const child = await Child.findById(claimedBy);
+        if (!child) {
+          throw new Error(`No child found for ID ${claimedBy}`);
         }
+        if (child.points < rewardToUpdate.cost) {
+          throw new ForbiddenError('Too rich for your blood');
+        }
+        const updatedReward = await Reward.findByIdAndUpdate(
+          { _id: _id },
+          { claimedBy },
+          { new: true }
+        );
+        await Child.findByIdAndUpdate({ _id: claimedBy }, { $inc: { 'points': (rewardToUpdate.cost * -1) } });
+        return updatedReward;
+        // for (let i = 0; i < user.rewardList.length; i++) {
+        //   if (_id === user.rewardList[i]._id.toString()) {
+        //     const reward = await Reward.findByIdAndUpdate(
+        //       { _id: _id },
+        //       { claimedBy },
+        //       { new: true }
+        //     );
+
+        //     await Child.findByIdAndUpdate({ _id: claimedBy }, { $inc: { 'points': (user.rewardList[i].cost * -1) } });
+        //     return reward;
+        //   }
+        // }
       } else {
         throw new AuthenticationError("Not Logged In");
       }

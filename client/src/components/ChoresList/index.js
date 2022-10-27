@@ -13,6 +13,8 @@ const ChoresList = () => {
   const [tabSelected, setTabSelected] = useState(1);
   const [newChore, setNewChore] = useState(defaultChore);
 
+  const { loading, error, data, refetch } = useQuery(QUERY_ME);
+
   const toggleTab = (index) => {
     setTabSelected(index);
   };
@@ -45,13 +47,18 @@ const ChoresList = () => {
     setShow(false);
   };
 
-  const setComplete = (e, choreId) => { editChore({ variables: { id: choreId, completedBy: e.target.value } }); };
+  const handleChoreCompleteChange = (e, choreId) => {
+    setComplete(choreId, e.target.value);
+  };
+
+  const setComplete = async (choreId, completedBy) => {
+    await editChore({ variables: { id: choreId, completedBy } });
+    refetch();
+  };
 
   const handleShow = () => {
-
     tabSelected === 1 && setShow(true);
   };
-  const { loading, error, data, refetch } = useQuery(QUERY_ME);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
 
@@ -102,7 +109,7 @@ const ChoresList = () => {
                       <td>{choreData.description}</td>
                       <td>{choreData.pointValue}</td>
                       <td>
-                        <select onChange={(e) => setComplete(e, choreData._id)}>
+                        <select onChange={(e) => handleChoreCompleteChange(e, choreData._id)}>
                           <option defaultValue={""}>Select A Child</option>
                           {data.me.children.map((child) => (
                             <option key={child._id}
