@@ -122,32 +122,15 @@
   
   /* Media Queries */
   
-  @media only screen and (max-width: 600px) {
-    .tabs--rewards {
-      width: 25%;
-    }
-    .tab-1--rewards::before {
-      left: 45%;
-      width:calc(100% + 13px)
-    }
-    .boardHeader--rewards h2 {
-      position: absolute;
-      left: 25%;
-    }
-    .addRewardsBtn--rewards {
-      top: 0.15rem;
-      right: .3rem;
-      margin-top: .05rem;
-      
-    }
+  @media only screen and (max-width: 1000px) {
     .content--rewards {
       word-break: normal;
     }
     th {
-      font-size: small;
+      font-size: large;
     }
     td{
-      font-size: small;
+      font-size: large;
     }
     th:nth-child(2) {
       display: none;
@@ -155,4 +138,42 @@
     td:nth-child(2) {
       display: none;
     }
-  }
+    .tabs--rewards {
+      width: 25%;
+    }
+    }
+    @media only screen and (max-width: 600px) {
+      .tabs--rewards {
+        width: 25%;
+      }
+      .tab-1--rewards::before {
+        left: 45%;
+        width:calc(100% + 13px)
+      }
+      .boardHeader--rewards h2 {
+        position: absolute;
+        left: 25%;
+      }
+      .addChoreBtn--rewards {
+        top: 0.15rem;
+        right: .3rem;
+        margin-top: .05rem;
+        
+      }
+    
+      .content--rewards {
+        word-break: normal;
+      }
+      th {
+        font-size: small;
+      }
+      td{
+        font-size: small;
+      }
+      th:nth-child(2) {
+        display: none;
+      }
+      td:nth-child(2) {
+        display: none;
+      }
+    }

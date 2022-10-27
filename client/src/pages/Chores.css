@@ -142,7 +142,26 @@ td button{
 }
 
 /* Media Queries */
-
+@media only screen and (max-width: 1000px) {
+.content--chores {
+  word-break: normal;
+}
+th {
+  font-size: large;
+}
+td{
+  font-size: large;
+}
+th:nth-child(2) {
+  display: none;
+}
+td:nth-child(2) {
+  display: none;
+}
+.tabs--chores {
+  width: 25%;
+}
+}
 @media only screen and (max-width: 600px) {
   .tabs--chores {
     width: 25%;
