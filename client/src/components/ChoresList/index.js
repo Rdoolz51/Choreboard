@@ -95,7 +95,7 @@ const ChoresList = () => {
               <Table hover responsive>
                 <thead>
                   <tr>
-                    <th>Chore Name:</th>
+                    <th>Chore Name</th>
                     <th>Chore Description</th>
                     <th>Point Value</th>
                     <th>Completed By</th>
@@ -146,7 +146,7 @@ const ChoresList = () => {
               <Table hover responsive>
                 <thead>
                   <tr>
-                    <th>Chore Name:</th>
+                    <th>Chore Name</th>
                     <th>Chore Description</th>
                     <th>Points Awarded</th>
                     <th>Completed By</th>
