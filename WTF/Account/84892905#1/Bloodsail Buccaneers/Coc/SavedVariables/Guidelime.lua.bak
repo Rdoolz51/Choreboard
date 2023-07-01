@@ -1,0 +1,36 @@
+
+GuidelimeDataChar = {
+	["mainFrameHeight"] = 400,
+	["showUnavailableSteps"] = true,
+	["guideSkip"] = {
+	},
+	["completedSteps"] = {
+	},
+	["editorFrameRelative"] = "CENTER",
+	["arrowY"] = -20,
+	["arrowRelative"] = "TOP",
+	["mainFrameX"] = 23.62478065490723,
+	["mainFrameLocked"] = false,
+	["guideSize"] = {
+	},
+	["mainFrameWidth"] = 350,
+	["arrowAlpha"] = 0.8,
+	["arrowLocked"] = false,
+	["showArrow"] = true,
+	["editorFrameY"] = 0,
+	["showCompletedSteps"] = false,
+	["mainFrameShowing"] = false,
+	["mainFrameY"] = -11.81246471405029,
+	["mainFrameAlpha"] = 0.5,
+	["showTitle"] = true,
+	["arrowX"] = 0,
+	["mainFrameFontSize"] = 14,
+	["arrowSize"] = 64,
+	["editorFrameX"] = 0,
+	["showMinimapButton"] = true,
+	["showUseItemButtons"] = "LEFT",
+	["mainFrameShowScrollBar"] = true,
+	["showTargetButtons"] = "LEFT",
+	["mainFrameRelative"] = "RIGHT",
+	["version"] = "3.024",
+}

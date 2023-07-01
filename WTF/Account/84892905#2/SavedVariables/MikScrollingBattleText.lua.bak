@@ -1,0 +1,21 @@
+
+MSBTProfiles_SavedVars = {
+	["profiles"] = {
+		["Default"] = {
+			["scrollAreas"] = {
+				["Static"] = {
+					["offsetX"] = -14,
+					["offsetY"] = -364,
+				},
+			},
+			["creationVersion"] = "5.8.1",
+			["enableBlizzardDamage"] = false,
+		},
+	},
+}
+MSBT_SavedMedia = {
+	["fonts"] = {
+	},
+	["sounds"] = {
+	},
+}

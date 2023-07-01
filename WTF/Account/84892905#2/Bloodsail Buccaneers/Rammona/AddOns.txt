@@ -1,0 +1,3 @@
+MobHealthClassic: disabled
+WeakAurasCompanion: enabled
+WeakAurasArchive: enabled

@@ -1,0 +1,33 @@
+
+VoiceOverDB = {
+	["char"] = {
+		["Coc - Bloodsail Buccaneers"] = {
+			["hasSeenGossipForNPC"] = {
+				["Creature-0-5163-1-29-3701-00002C3288"] = true,
+			},
+		},
+	},
+	["profileKeys"] = {
+		["Bluecoc - Bloodsail Buccaneers"] = "Bluecoc - Bloodsail Buccaneers",
+		["Coc - Bloodsail Buccaneers"] = "Coc - Bloodsail Buccaneers",
+		["Humanwarrior - Bloodsail Buccaneers"] = "Humanwarrior - Bloodsail Buccaneers",
+	},
+	["profiles"] = {
+		["Bluecoc - Bloodsail Buccaneers"] = {
+			["main"] = {
+				["SeenDuplicateDialog"] = true,
+			},
+		},
+		["Coc - Bloodsail Buccaneers"] = {
+			["main"] = {
+				["SeenDuplicateDialog"] = true,
+				["GossipFrequency"] = "Always",
+			},
+		},
+		["Humanwarrior - Bloodsail Buccaneers"] = {
+			["main"] = {
+				["SeenDuplicateDialog"] = true,
+			},
+		},
+	},
+}

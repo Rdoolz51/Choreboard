@@ -1,0 +1,5 @@
+WeakAurasCompanion: enabled
+WeakAurasArchive: enabled
+RXPGuides: enabled
+Guidelime: disabled
+Guidelime_Sage: disabled

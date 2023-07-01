@@ -1,0 +1,5 @@
+Guidelime: disabled
+Guidelime_Sage: disabled
+WeakAurasCompanion: enabled
+WeakAurasArchive: enabled
+MobHealthClassic: disabled

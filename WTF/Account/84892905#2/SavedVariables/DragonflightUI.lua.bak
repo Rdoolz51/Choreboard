@@ -1,0 +1,22 @@
+
+DragonflightUIDB = {
+	["namespaces"] = {
+		["Unitframe"] = {
+		},
+		["Actionbar"] = {
+		},
+		["Chat"] = {
+		},
+		["Castbar"] = {
+		},
+		["Minimap"] = {
+		},
+	},
+	["profileKeys"] = {
+		["Rammon - Bloodsail Buccaneers"] = "Default",
+	},
+	["profiles"] = {
+		["Default"] = {
+		},
+	},
+}

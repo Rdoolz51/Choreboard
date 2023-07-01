@@ -1,0 +1,86 @@
+VER 3 000000000000000D "2H" "INV_MISC_QUESTIONMARK"
+/equip Merciless Axe
+END
+VER 3 0000000000000013 "AS" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast !Auto Shot
+END
+VER 3 000000000000000E "CL" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast Cleave
+/startattack
+END
+VER 3 000000000000000B "DEATH" "INV_MISC_QUESTIONMARK"
+/s Mr Stark...I dont feel so good
+END
+VER 3 0000000000000001 "Decursive" "INV_MISC_QUESTIONMARK"
+/stopcasting
+/cast [@mouseover,nomod,exists] Cure Poison;  [@mouseover,exists,mod:ctrl] Cure Disease; [@mouseover,exists,mod:shift] Purge
+END
+VER 3 000000000000000F "DW" "INV_MISC_QUESTIONMARK"
+/equip Stinging Viper
+/equip Elegant Shortsword
+END
+VER 3 0000000000000004 "Ghost Wolf" "INV_MISC_QUESTIONMARK"
+#showtooltip Ghost Wolf
+/stand
+/dismount
+/cast Ghost Wolf
+END
+VER 3 0000000000000005 "GTPVP" "INV_MISC_QUESTIONMARK"
+<GREEN TEA AND PVP> is recruiting members for our Core raid team. Molten Core is Sundays @ 8:00pm ST. Searching for DPS with preference to Warriors, Rogues, and Mages. All players welcome to guild. PST for info or invite
+END
+VER 3 0000000000000008 "HS" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast Heroic Strike
+/startattack
+/tar Son of Arugal
+END
+VER 3 0000000000000003 "Mount" "INV_MISC_QUESTIONMARK"
+#showtooltip Whistle of the Violet Raptor
+/stand
+/cancelaura Ghost Wolf
+/use Whistle of the Violet Raptor
+END
+VER 3 0000000000000014 "pp" "INV_MISC_QUESTIONMARK"
+/petpassive
+/petfollow
+END
+VER 3 0000000000000012 "RS" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast Raptor Strike
+/startattack
+END
+VER 3 0000000000000007 "RXPTargeting" "Ability_eyeoftheowl"
+//RestedXP Guides - current step has no configured targets
+END
+VER 3 000000000000000A "SA" "INV_MISC_QUESTIONMARK"
+#showtooltip
+/cast Sunder Armor
+/startattack
+/tar Son of Arugal
+END
+VER 3 0000000000000009 "sit" "INV_MISC_QUESTIONMARK"
+/sit
+END
+VER 3 000000000000000C "SnB" "INV_MISC_QUESTIONMARK"
+/equip Stinging Viper
+/equip Seedcloud Buckler
+END
+VER 3 0000000000000011 "SW" "INV_MISC_QUESTIONMARK"
+#showtooltip Shield Wall
+/cast Defensive Stance
+/equip Stinging Viper
+/equip Seedcloud Buckler
+/cast Shield Wall
+END
+VER 3 0000000000000010 "Taunt" "INV_MISC_QUESTIONMARK"
+#showtooltip Taunt
+/cast Defensive Stance
+/cast Taunt
+END
+VER 3 0000000000000006 "WORLD SPAM" "INV_MISC_QUESTIONMARK"
+WE HAVE BEEN SET FREE. CALLING FOR MASS PURGES ON ALLIANCE GUILDS <POWER> <SHUT UP AND PULL> <VAMPIRE CLAN> <QUINTESSENTIAL> AND ANY OTHER GUILD FOUND COLLUDING WITH DOGZ
+END
+VER 3 0000000000000002 "ZygorAction1" "134400"
+END
