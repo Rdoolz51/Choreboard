@@ -1,6 +1,0 @@
-WeakAurasCompanion: enabled
-WeakAurasArchive: enabled
-Guidelime: disabled
-WeakAurasOptions: enabled
-WeakAurasTemplates: enabled
-Guidelime_Sage: disabled

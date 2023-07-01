@@ -1,4 +1,0 @@
-WeakAurasCompanion: enabled
-WeakAurasArchive: enabled
-RXPGuides: enabled
-VoiceOver: disabled

@@ -1,3 +1,0 @@
-VoiceOver: disabled
-WeakAurasCompanion: enabled
-WeakAurasArchive: enabled
