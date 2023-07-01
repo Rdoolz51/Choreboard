@@ -1,0 +1,448 @@
+<Ui>
+  <Font name="DeathListFont" font="Interface\AddOns\Hardcore\Media\UbuntuMono-R.ttf" virtual="true">
+    <FontHeight>
+      <AbsValue val="12"/>
+    </FontHeight>
+  </Font>
+
+  <Font name="HardcoreFont" font="Interface\AddOns\Hardcore\Media\BreatheFire.ttf" virtual="true">
+
+	<Color r="0.98" g="0.86" b="0" a="1"/> -- 252, 222, 0
+	<FontHeight val="32"/>
+	<Shadow>
+    	<Offset x="-2" y="-2" />
+    	<Color r="0" g="0" b="0"/>
+  	</Shadow>
+	<Shadow>
+    	<Offset x="-2" y="2" />
+    	<Color r="0" g="0" b="0"/>
+  	</Shadow>
+	<Shadow>
+    	<Offset x="2" y="-2" />
+    	<Color r="0" g="0" b="0"/>
+  	</Shadow>
+	<Shadow>
+    	<Offset x="2" y="2" />
+    	<Color r="0" g="0" b="0"/>
+  	</Shadow>
+  </Font>
+
+  <Button name = "DeathListEntryTemplate" virtual="true">
+    <Size>
+      <AbsDimension x="150" y="16" />
+    </Size>
+    <NormalFont style="DeathListFont"/>
+  </Button>
+
+  <?comment msg="This provides dynamic style templating, via ALERT_STYLES" ?>
+  <Frame name="Hardcore_Alert_Frame" parent="UIParent" hidden="true" toplevel="true">
+		<Size x="400" y="610" />
+		<Anchors>
+			<Anchor point="TOP" relativeTo="UIParent" relativePoint="TOP" y="-150" /> <?comment msg="This controls the position of the entire frame, relative to UI Parent" ?>
+		</Anchors>
+		<Layers>
+			<Layer>
+				<Texture name="Hardcore_Alert_Icon" file="Interface\AddOns\Hardcore\Media\logo-emblem.blp">
+					<Size x="400" y="200" />
+					<Anchors>
+						<Anchor point="TOP" relativeTo="Hardcore_Alert_Frame" relativePoint="TOP" y="50" /> 
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="Hardcore_Alert_Text" inherits="HardcoreFont" justifyH="CENTER" justifyV="TOP">
+					<Size x="360" y="350" />
+					<Anchors>
+						<Anchor point="TOP" relativeTo="Hardcore_Alert_Icon" relativePoint="TOP" y="-140" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+  </Frame>
+
+  <Frame name="Hardcore_Frame" parent="UIParent" hidden="true" toplevel="true" clampedToScreen="true" enableMouse="true" movable="true" inherits="BackdropTemplate">
+		<Size x="700" y="500" />
+		<Anchors>
+			<Anchor point="TOPLEFT" relativeTo="UIParent" relativePoint="TOPLEFT" x="336" y="-35" />
+		</Anchors>
+		<KeyValues>
+			<KeyValue key="backdropInfo" value="BACKDROP_DIALOG_32_32" type="global"/>
+		</KeyValues>
+		<Layers>
+		<Layer>
+			<Texture name="Hardcore_Logo1" file="Interface\AddOns\Hardcore\Media\wowhc-emblem-white-red.blp">
+				<Size x="50" y="50" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="235" y="-5" />
+				</Anchors>
+			</Texture>
+		</Layer>
+			<Layer level="OVERLAY">
+				<FontString name="Hardcore_Title" inherits="HardcoreFont" text="HARDCORE">
+					<Color a="1" r="1" g="1" b="1" />
+					<Size x="242" y="37" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="242" y="-15" />
+					</Anchors>
+				</FontString>
+				<FontString name="Hardcore_SubTitle" inherits="GameFontNormal" text="We honor those who have fallen">
+					<Size x="282" y="20" />
+					<Anchors>
+						<Anchor point="TOPLEFT" x="222" y="-52" />
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+          <OnDragStart>
+            self:StartMoving()
+          </OnDragStart>
+          <OnDragStop>
+            self:StopMovingOrSizing()
+          </OnDragStop>
+		  <OnLoad>
+			tinsert(UISpecialFrames, self:GetName());
+		  </OnLoad>
+		  <OnShow>
+			Hardcore_Frame_OnShow()
+		  </OnShow>
+		</Scripts>
+
+	  <Frames>
+		  <ScrollFrame name="MyModScrollBar" parent="Hardcore_Frame" inherits="FauxScrollFrameTemplate" hidden="true">
+		    <Size x="375" y="350" />
+			<Anchors>
+			  <Anchor point="TOPLEFT">
+				<Offset>
+				  <AbsDimension x="250" y="-100"/>
+				</Offset>
+			  </Anchor>
+			</Anchors>
+			<Scripts>
+			  <OnVerticalScroll>
+				FauxScrollFrame_OnVerticalScroll(self, offset, 16, Hardcore_Deathlist_ScrollBar_Update);
+			  </OnVerticalScroll>
+			  <OnShow>
+				Hardcore_TOD_Sort:SetAlpha(1)
+				Hardcore_Zone_Sort:SetAlpha(0.5)
+				Hardcore_Level_Sort:SetAlpha(0.5)
+				Hardcore_Class_Sort:SetAlpha(0.5)
+				Hardcore_Name_Sort:SetAlpha(0.5)
+				Hardcore_Deathlist_ScrollBar_Update()
+			  </OnShow>
+			</Scripts>
+		  </ScrollFrame>
+
+		  <Button name="DeathListEntry1" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="MyModScrollBar" relativePoint="TOPLEFT">
+				<Offset>
+				  <AbsDimension x="8" y="0"/>
+				</Offset>
+			   </Anchor>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry2" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry1" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <EditBox name="Hardcore_VerificationString" multiline="true" inherits="DeathListEntryTemplate">
+			<Size>
+				<AbsDimension x="500" y="200"></AbsDimension>
+			</Size>
+			<Anchors>
+				<Anchor point="TOPLEFT" relativeTo="DeathListEntry2" relativePoint="BOTTOMLEFT" x="-150"/>
+			</Anchors>
+			<Layers>
+    </Layers>
+			<FontString inherits="GameFontNormal"/>
+		  </EditBox>
+		  <Button name="DeathListEntry3" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry2" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry4" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry3" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry5" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry4" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry6" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry5" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry7" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry6" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry8" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry7" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry9" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry8" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry10" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry9" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry11" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry10" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry12" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry11" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry13" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry12" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry14" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry13" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry15" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry14" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry16" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry15" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry17" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry16" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry18" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry17" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry19" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry18" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+		  <Button name="DeathListEntry20" inherits="DeathListEntryTemplate">
+			<Anchors>
+			  <Anchor point="TOPLEFT" relativeTo="DeathListEntry19" relativePoint="BOTTOMLEFT"/>
+			</Anchors>
+		  </Button>
+
+			<Button name="Hardcore_DeathKnight_Button" inherits="UIPanelButtonTemplate" text="Death Knight">
+				<Size x="120" y="37" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="70" y="-20" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore:SwitchDisplay("DeathKnight")
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="Hardcore_Alerts_Button" inherits="UIPanelButtonTemplate" text="Disable alerts">
+				<Size x="120" y="37" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="520" y="-20" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore_Toggle_Alerts()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_Name_Sort" inherits="OptionsButtonTemplate" text="Name">
+				<Size x="100" y="20" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="65" y="-80" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore_TOD_Sort:SetAlpha(0.5)
+						Hardcore_Zone_Sort:SetAlpha(0.5)
+						Hardcore_Level_Sort:SetAlpha(0.5)
+						Hardcore_Class_Sort:SetAlpha(0.5)
+						Hardcore_Name_Sort:SetAlpha(1)
+						Hardcore_Deathlist_ScrollBar_Update()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_Class_Sort" inherits="OptionsButtonTemplate" text="Class">
+				<Size x="65" y="20" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="175" y="-80" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore_TOD_Sort:SetAlpha(0.5)
+						Hardcore_Zone_Sort:SetAlpha(0.5)
+						Hardcore_Level_Sort:SetAlpha(0.5)
+						Hardcore_Class_Sort:SetAlpha(1)
+						Hardcore_Name_Sort:SetAlpha(0.5)
+						Hardcore_Deathlist_ScrollBar_Update()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_Level_Sort" inherits="OptionsButtonTemplate" text="Level">
+				<Size x="65" y="20" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="240" y="-80" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore_TOD_Sort:SetAlpha(0.5)
+						Hardcore_Zone_Sort:SetAlpha(0.5)
+						Hardcore_Level_Sort:SetAlpha(1)
+						Hardcore_Class_Sort:SetAlpha(0.5)
+						Hardcore_Name_Sort:SetAlpha(0.5)
+						Hardcore_Deathlist_ScrollBar_Update()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_Zone_Sort" inherits="OptionsButtonTemplate" text="Zone">
+				<Size x="145" y="20" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="305" y="-80" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore_TOD_Sort:SetAlpha(0.5)
+						Hardcore_Zone_Sort:SetAlpha(1)
+						Hardcore_Level_Sort:SetAlpha(0.5)
+						Hardcore_Class_Sort:SetAlpha(0.5)
+						Hardcore_Name_Sort:SetAlpha(0.5)
+						Hardcore_Deathlist_ScrollBar_Update()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_TOD_Sort" inherits="OptionsButtonTemplate" text="Time">
+				<Size x="120" y="20" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="470" y="-80" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore_TOD_Sort:SetAlpha(1)
+						Hardcore_Zone_Sort:SetAlpha(0.5)
+						Hardcore_Level_Sort:SetAlpha(0.5)
+						Hardcore_Class_Sort:SetAlpha(0.5)
+						Hardcore_Name_Sort:SetAlpha(0.5)
+						Hardcore_Deathlist_ScrollBar_Update()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_DispLevels" inherits="UIPanelButtonTemplate" text="Levels">
+				<Size x="75" y="37" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="70" y="-450" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore:SwitchDisplay("Levels")
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_GetVerified" inherits="UIPanelButtonTemplate" text="Get verified">
+				<Size x="95" y="37" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="165" y="-450" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore:SwitchDisplay("GetVerified")
+          </OnClick>
+        </Scripts>
+      </Button>
+			<Button name="Hardcore_DispRules" inherits="UIPanelButtonTemplate" text="Rules">
+				<Size x="75" y="37" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="280" y="-450" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore:SwitchDisplay("Rules")
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_MinimapToggle" inherits="UIPanelButtonTemplate" text="Minimap button">
+				<Size x="120" y="37" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="380" y="-450" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore:ToggleMinimapIcon()
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_DispAddonStatus" inherits="UIPanelButtonTemplate" text="Accountability">
+				<Size x="105" y="37" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="520" y="-450" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore:SwitchDisplay("AddonStatus")
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			<Button name="Hardcore_DK_Sacrifice" inherits="UIPanelButtonTemplate" text="Sacrifice">
+				<Size x="100" y="37" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="240" y="-380" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore:DKConvert("sacrifice") 
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="Hardcore_DK_Activate" inherits="UIPanelButtonTemplate" text="Activate">
+				<Size x="100" y="37" />
+				<Anchors>
+					<Anchor point="TOPLEFT" x="360" y="-380" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore:DKConvert("activate")
+					</OnClick>
+				</Scripts>
+			</Button>
+
+			
+			<Button name="Hardcore_Close" inherits="UIPanelButtonTemplate" text="X">
+				<Size x="30" y="30" />
+				<Anchors>
+					<Anchor point="TOPRIGHT" x="-10" y="-10" />
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						Hardcore_Frame:Hide()
+					</OnClick>
+				</Scripts>
+			</Button>
+	  </Frames>
+  </Frame>
+</Ui>

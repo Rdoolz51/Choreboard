@@ -1,0 +1,9 @@
+## Interface: 11304
+## Author: Devchonka-Patchwerk
+## Version: 4
+## Title: MobHealthClassic
+## Notes: MobHealthClassic
+## DefaultState:  enabled
+## SavedVariables: MobHealthClassicSetting
+
+main.lua

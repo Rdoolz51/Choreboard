@@ -1,0 +1,109 @@
+{
+	"files": [
+		{
+			"path": "dropdown.lua",
+			"bookmarks": [
+				{
+					"line": 927,
+					"column": 0,
+					"label": ""
+				},
+				{
+					"line": 1123,
+					"column": 67,
+					"label": ""
+				},
+				{
+					"line": 1155,
+					"column": 15,
+					"label": ""
+				},
+				{
+					"line": 1218,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "fw.lua",
+			"bookmarks": [
+				{
+					"line": 1428,
+					"column": 8,
+					"label": ""
+				},
+				{
+					"line": 1529,
+					"column": 5,
+					"label": ""
+				},
+				{
+					"line": 2965,
+					"column": 1,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "cooltip.lua",
+			"bookmarks": [
+				{
+					"line": 291,
+					"column": 2,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "f:/World of Warcraft/_retail_/BlizzardInterfaceCode/Interface/FrameXML/StaticPopup.lua",
+			"bookmarks": [
+				{
+					"line": 3010,
+					"column": 32,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "panel.lua",
+			"bookmarks": [
+				{
+					"line": 1985,
+					"column": 39,
+					"label": ""
+				},
+				{
+					"line": 10110,
+					"column": 42,
+					"label": ""
+				},
+				{
+					"line": 10237,
+					"column": 0,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "normal_bar.lua",
+			"bookmarks": [
+				{
+					"line": 608,
+					"column": 37,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "savedvars.lua",
+			"bookmarks": [
+				{
+					"line": 76,
+					"column": 37,
+					"label": ""
+				}
+			]
+		}
+	]
+}
