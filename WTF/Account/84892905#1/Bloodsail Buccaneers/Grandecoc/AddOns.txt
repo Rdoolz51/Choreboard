@@ -1,6 +1,0 @@
-VoiceOver: disabled
-WeakAurasCompanion: enabled
-WeakAurasArchive: enabled
-AI_VoiceOver: disabled
-Guidelime: disabled
-Guidelime_Sage: disabled
